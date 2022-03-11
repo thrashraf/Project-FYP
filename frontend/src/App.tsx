@@ -1,9 +1,13 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
 
 function App() {
   return (
-    <div className="h-screen bg-blue-500">
-      
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
