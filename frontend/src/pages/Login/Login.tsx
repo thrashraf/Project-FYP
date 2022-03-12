@@ -12,20 +12,19 @@ export const Login = (props: Props) => {
         <p className=' text-gray-400'>Let's Login With Us</p>
 
         <form action='' className=' flex flex-col mt-10'>
-          <input type='text' className=' bg-blue-50 px-3 py-3 rounded-lg outline-none'/>
+          <input type='text' className=' bg-blue-50 px-3 py-3 rounded-lg outline-none' />
           <input
-          type='password'
-          className=' bg-blue-50 px-3 py-3 rounded-lg mt-5 outline-none'/>
-            <a href='' className=' text-center mt-5 text-blue-500'>Forgot Password?</a>
-          
+            type='password'
+            className=' bg-blue-50 px-3 py-3 rounded-lg mt-5 outline-none' />
+          <a href='' className=' text-center mt-5 text-blue-500'>Forgot Password?</a>
+
           <button className='mt-10 bg-blue-500 text-white px-3 py-3 rounded-lg'>
             Login
-            </button>
-            </form>
-
-
+          </button>
+        </form>
       </div>
 
-      </div>
+    </div>
 
-  )}
+  )
+}
