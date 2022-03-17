@@ -3,7 +3,7 @@ import { Form } from "./Form";
 
 const Register = () => {
   return (
-    <div className="h-screen px-10 flex flex-col justify-center max-w-md m-auto lg:grid grid-cols-2  lg:px-0 lg:w-full lg:max-w-7xl lg:overflow-hidden">
+    <div className="h-screen px-10 flex flex-col justify-center max-w-md m-auto lg:grid grid-cols-2  lg:px-0 lg:w-full lg:max-w-[1600px] lg:overflow-hidden">
       {/* images */}
       <Image />
 
@@ -14,6 +14,7 @@ const Register = () => {
 
         <Form />
       </section>
+
     </div>
   );
 };
