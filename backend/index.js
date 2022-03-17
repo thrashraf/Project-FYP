@@ -1,7 +1,11 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+
 const port = 5000;
+
+//* import route
+import usersRoute from './router/usersRoute.js';
 
 const app = express();
 
@@ -10,5 +14,8 @@ app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 
 //support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use('/api', usersRoute);
 
 app.listen(port, console.log(`server running on port ${port}`))
