@@ -14,7 +14,7 @@ export const Form = () => {
   const onSubmitHandler = (e: React.SyntheticEvent) => {
     //? to prevent refresh after submit
     e.preventDefault();
-
+ 
     axios.post(
         "/api/user/register",
         { firstName, lastName, email, password },
