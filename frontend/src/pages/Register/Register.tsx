@@ -9,7 +9,7 @@ const Register = () => {
 
       {/* form */}
       <section className="lg:p-[20%]">
-        <h1 className="text-3xl font-semibold">Welcome Back.</h1>
+        <h1 className="text-3xl font-semibold">Welcome Back</h1>
         <p className="text-gray-400">let's continue with us</p>
 
         <Form />
