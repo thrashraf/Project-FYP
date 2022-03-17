@@ -27,7 +27,7 @@ export const Form = () => {
         console.log(err);
       });
   };
-
+ 
   return (
     <form className="flex flex-col justify-center" onSubmit={onSubmitHandler}>
       <section className="grid grid-cols-2 gap-3 ">
