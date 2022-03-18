@@ -8,11 +8,16 @@ dotenv.config()
 
 export const registerUser = async (req, res) => {
   try {
+
     //get value from frontend 
+
     const { firstName, lastName, email, password } = req.body;
 
     //create an unique id
     const id = crypto.randomBytes(16).toString("hex");
+
+
+    await user.register(id, firstName, email, password);
 
     //want to check if user exist
     const [checkExistingEmail] = await user.checkEmail(email);
@@ -35,8 +40,11 @@ export const registerUser = async (req, res) => {
     res.status(200).json({
       message: "successful create!",
     });
-    
-  } catch (error) { }
+
+
+  } catch (error) {
+
+  }
 
 };
 
@@ -46,20 +54,20 @@ export const loginuser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const [checkExistingEmail] = await user.checkEmail(email);
-    
 
-    if(!checkExistingEmail){
+
+    if (!checkExistingEmail) {
       return res.status(400).json({
-        message:"Incorrect Email or Password"
+        message: "Incorrect Email or Password"
       })
     }
 
     //User info
     const userInfo = checkExistingEmail[0]
     const isvalid = bcrypt.compareSync(password, userInfo.password)
-    
-    const token = jwt.sign({id: userInfo.id}, process.env.TOKEN_SECRET)
-    
+
+    const token = jwt.sign({ id: userInfo.id }, process.env.TOKEN_SECRET)
+
   } catch (error) {
 
   }

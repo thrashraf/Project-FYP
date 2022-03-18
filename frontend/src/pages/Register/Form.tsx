@@ -102,7 +102,11 @@ export const Form = () => {
       <input
         type="submit"
         placeholder="Register"
+<<<<<<< HEAD
+        className="mt-10 bg-blue-500 text-white px-3 py-3 rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-blue-400 cursor-pointer  "
+=======
         className="mt-10 bg-blue-500 text-white px-3 py-3 rounded-lg "
+>>>>>>> 3f3ebadd462a45e2aafbcd1588606f1ecc6f0c69
         value="Register"
         
       />
