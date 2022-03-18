@@ -8,7 +8,7 @@ dotenv.config()
 
 export const registerUser = async (req, res) => {
   try {
-    //get value from frontend
+    //get value from frontend 
     const { firstName, lastName, email, password } = req.body;
 
     //create an unique id
