@@ -1,14 +1,16 @@
+import user from "../model/users.js";
+import crypto from "crypto";
 
+export const registerUser = async (req, res) => {
+  try {
+    const { firstName, lastName, email, password } = req.body;
 
-export const registerUser = async(req, res) => {
-    try {
+    //to generate unique id
+    const id = crypto.randomBytes(16).toString("hex");
 
-        const {firstName, lastName, email, password} = req.body;
-        
-        console.log(firstName, lastName, email, password);
+    await user.register(id, firstName, email, password);
 
-    } catch (error) {
-        
-    }
-}
+    res.status(200).json({message: 'successful create!'})
 
+  } catch (error) {}
+};

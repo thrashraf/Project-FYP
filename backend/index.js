@@ -2,7 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 
-const port = 5000;
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const port = 5000 || process.env.PORT;
 
 //* import route
 import usersRoute from './router/usersRoute.js';
