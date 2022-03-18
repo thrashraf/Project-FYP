@@ -7,7 +7,7 @@ import Toast from "../../components/Toast";
 export const Form = () => {
   
   // create an instance for useNavigate
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
 
   //to create references for Html Input Element
   const toastRef = useRef<any>(null);
