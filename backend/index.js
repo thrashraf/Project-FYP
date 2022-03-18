@@ -23,10 +23,4 @@ app.use(bodyParser.json());
 app.use('/api', usersRoute);
 
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 3f3ebadd462a45e2aafbcd1588606f1ecc6f0c69
 app.listen(port, console.log(`server running on port ${port}`))
