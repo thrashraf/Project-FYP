@@ -17,7 +17,7 @@ class user {
             users (id, name, email, password, role)
         VALUES
         (
-            '${id}',
+            '${id}', 
             '${firstName}',
             '${email}',
             '${password}'
