@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Input } from "../../components/Input";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Form = () => {
   // state
@@ -8,6 +9,9 @@ export const Form = () => {
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  //create an instance for useNavigate
+  const navigate = useNavigate()
 
 
   //? to make request for register user
@@ -22,6 +26,7 @@ export const Form = () => {
       )
       .then((res) => {
         console.log(res);
+        navigate('/login')
       })
       .catch((err) => {
         console.log(err);

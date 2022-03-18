@@ -10,4 +10,4 @@ const pool = mysql.createConnection({
     password: process.env.DB_PASSWORD,
 })
 
-export default pool.promise()
+export default pool.promise() 
