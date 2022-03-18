@@ -35,11 +35,12 @@ export const Form = () => {
       )
       .then((res) => {
         console.log(res);
-        createUserHandler('success', 'successful register! please login')
+        createUserHandler('success', res.data.message)
+        console.log(res);
         //navigate('/login')
       })
       .catch((err) => {
-        createUserHandler('error', 'something went wrong')
+        createUserHandler('error', err.response.data.message)
         console.log(err);
       });
   };
