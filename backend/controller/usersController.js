@@ -8,14 +8,21 @@ dotenv.config()
 
 export const registerUser = async (req, res) => {
   try {
+<<<<<<< HEAD
     
+=======
+    //get value from frontend 
+>>>>>>> 3f3ebadd462a45e2aafbcd1588606f1ecc6f0c69
     const { firstName, lastName, email, password } = req.body;
 
     //create an unique id
     const id = crypto.randomBytes(16).toString("hex");
+<<<<<<< HEAD
     
     await user.register(id, firstName, email, password);
 
+=======
+>>>>>>> 3f3ebadd462a45e2aafbcd1588606f1ecc6f0c69
 
     //want to check if user exist
     const [checkExistingEmail] = await user.checkEmail(email);
