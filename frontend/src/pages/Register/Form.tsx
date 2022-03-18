@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Input } from "../../components/Input";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Toast from "../../components/Toast";
 
 export const Form = () => {
+  
+  // create an instance for useNavigate
+  const navigate = useNavigate();
+
+  //to create references for Html Input Element
+  const toastRef = useRef<any>(null);
+
   // state
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  // toast state
+  const [status, setStatus] = useState<string>("success");
+  const [message, setMessage] = useState<string>("successful !");
 
 
   //? to make request for register user
@@ -22,14 +35,32 @@ export const Form = () => {
       )
       .then((res) => {
         console.log(res);
+        createUserHandler('success', 'successful register! please login')
+        //navigate('/login')
       })
       .catch((err) => {
+        createUserHandler('error', 'something went wrong')
         console.log(err);
       });
   };
 
+  const createUserHandler = (status: string, message: string) => {
+    if (toastRef.current !== null) {
+      setStatus(status)
+      setMessage(message)
+      toastRef.current.showToast()
+    }
+  }
+ 
   return (
     <form className="flex flex-col justify-center" onSubmit={onSubmitHandler}>
+      
+      <Toast 
+      status={status} 
+      message={message} 
+      ref={toastRef}
+      />
+
       <section className="grid grid-cols-2 gap-3 ">
         <Input
           type="text"
@@ -72,6 +103,7 @@ export const Form = () => {
         placeholder="Register"
         className="mt-10 bg-blue-500 text-white px-3 py-3 rounded-lg "
         value="Register"
+        
       />
     </form>
   );
