@@ -1,7 +1,7 @@
 import db from "../config/db.js";
 
 class user {
-
+ 
 
 
     static async checkEmail(email) {
