@@ -23,7 +23,4 @@ app.use(bodyParser.json());
 app.use('/api', usersRoute);
 
 
-
-
-
 app.listen(port, console.log(`server running on port ${port}`))
