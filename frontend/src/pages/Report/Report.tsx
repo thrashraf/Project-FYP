@@ -39,7 +39,7 @@ const Report = (props: Props) => {
               rows={13}
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              className="bg-blue-50 px-3 py-3 rounded-lg outline-none w-full"
+              className="bg-blue-50 px-3 py-3 rounded-lg outline-none w-full resize-none"
             />
           </section>
         </div>
