@@ -1,8 +1,6 @@
 import db from "../config/db.js";
 
 class user {
- 
-
 
     static async checkEmail(email) {
         const sql = `SELECT * FROM users where email = '${email}'`;
@@ -11,8 +9,6 @@ class user {
 
     static async register(id, firstName, email, password) {
 
-
-        
         const sql = `INSERT INTO
             users (id, name, email, password, role)
         VALUES
@@ -20,7 +16,8 @@ class user {
             '${id}', 
             '${firstName}',
             '${email}',
-            '${password}'
+            '${password}',
+            'staff'
 
         )`;
         return db.execute(sql);
