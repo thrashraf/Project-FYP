@@ -2,9 +2,9 @@ import user from "../model/users.js";
 import crypto from "crypto";
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
-import bcrypt from "bcryptjs";
+import bcrypt from "bcryptjs"; 
 dotenv.config()
-
+   
 
 export const registerUser = async (req, res) => {
   try {
@@ -12,12 +12,9 @@ export const registerUser = async (req, res) => {
     //get value from frontend 
 
     const { firstName, lastName, email, password } = req.body;
-
+    console.log(firstName, lastName, email, password)
     //create an unique id
     const id = crypto.randomBytes(16).toString("hex");
-
-
-    await user.register(id, firstName, email, password);
 
     //want to check if user exist
     const [checkExistingEmail] = await user.checkEmail(email);
@@ -43,7 +40,7 @@ export const registerUser = async (req, res) => {
 
 
   } catch (error) {
-
+    console.log(error)
   }
 
 };
