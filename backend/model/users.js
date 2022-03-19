@@ -9,15 +9,16 @@ class user {
 
     static async register(id, firstName, email, password) {
 
-        console.log(password)
         const sql = `INSERT INTO
-            users (id, name, email, password)
+            users (id, name, email, password, role)
         VALUES
         (
-            '${id}',
+            '${id}', 
             '${firstName}',
             '${email}',
-            '${password}'
+            '${password}',
+            'staff'
+
         )`;
         return db.execute(sql);
     }
