@@ -1,7 +1,7 @@
 export const Image = () => {
   return (
     <div className="hidden lg:flex">
-            <img src="/assets/login.jpg" alt="" className=" object-cover"></img>
+      <img src="/assets/login.jpg" alt="" className=" object-cover"></img>
     </div>
-  )
-}
+  );
+};

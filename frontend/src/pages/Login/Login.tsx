@@ -1,4 +1,4 @@
-import { Image } from "./Image"
+import { Image } from "./Image";
 import { Form } from "./Form";
 export const Login = () => {
   return (
@@ -9,7 +9,7 @@ export const Login = () => {
 
         <Form />
       </div>
-      <Image/>
+      <Image />
     </div>
   );
 };
