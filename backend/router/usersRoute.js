@@ -5,6 +5,6 @@ import * as users from '../controller/usersController.js';
 const usersRoute = express.Router();
 
 usersRoute.post('/user/register', users.registerUser);
-usersRoute.post('/user/login', users.loginuser )
+usersRoute.post('/user/login', users.loginUser )
 
 export default usersRoute
