@@ -2,8 +2,6 @@ import db from "../config/db.js";
 
 class user {
  
-
-
     static async checkEmail(email) {
         const sql = `SELECT * FROM users where email = '${email}'`;
         return db.execute(sql)
@@ -24,6 +22,7 @@ class user {
         )`;
         return db.execute(sql);
     }
+   
 }
 
 export default user;

@@ -61,9 +61,14 @@ export const loginuser = async (req, res) => {
 
     //User info
     const userInfo = checkExistingEmail[0]
-    const isvalid = bcrypt.compareSync(password, userInfo.password)
 
-    const token = jwt.sign({ id: userInfo.id }, process.env.TOKEN_SECRET)
+    const isValid = bcrypt.compareSync(password, userInfo.password)
+
+    if (!isValid) {
+      return res.status(400).send('password incorrect');
+    }
+
+    const token = jwt.sign({ id: userInfo.id }, process.env.TOKEN_SECRET,)
 
   } catch (error) {
 
