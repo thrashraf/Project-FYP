@@ -1,16 +1,14 @@
 import user from "../model/users.js";
 import crypto from "crypto";
-import jwt from "jsonwebtoken"
-import dotenv from "dotenv"
-import bcrypt from "bcryptjs"; 
-dotenv.config()
-   
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import bcrypt from "bcryptjs";
+dotenv.config();
 
 export const registerUser = async (req, res) => {
   try {
 
     //get value from frontend 
-
     const { firstName, lastName, email, password } = req.body;
     console.log(firstName, lastName, email, password)
     //create an unique id
@@ -45,9 +43,7 @@ export const registerUser = async (req, res) => {
 
 };
 
-
-
-export const loginuser = async (req, res) => {
+export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const [checkExistingEmail] = await user.checkEmail(email);
@@ -64,13 +60,34 @@ export const loginuser = async (req, res) => {
 
     const isValid = bcrypt.compareSync(password, userInfo.password)
 
-    if (!isValid) {
-      return res.status(400).send('password incorrect');
+    
+    if(!isValid){
+      return res.status(400).json({
+        message: "Incorrect Email or Password"
+      })
     }
 
-    const token = jwt.sign({ id: userInfo.id }, process.env.TOKEN_SECRET,)
+    const accessToken = jwt.sign(
+      { id: userInfo.id },
+      process.env.ACCESS_TOKEN_SECRET,
+      {
+        expiresIn: "20s",
+      }
+    );
+    console.log(accessToken);
+    
+    const refreshToken = jwt.sign(
+      { id: userInfo.id },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        expiresIn: "1d",
+      }
+    );
+
+    res.status(200).json({ accessToken });
 
   } catch (error) {
-
+    console.log(error)
+    res.status(404).json({ msg: "Email Not Found" });
   }
-}
+};
