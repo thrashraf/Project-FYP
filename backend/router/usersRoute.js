@@ -1,5 +1,6 @@
 import express from 'express';
 import * as users from '../controller/usersController.js';
+import { verifytoken } from '../middleware/verifytoken.js';
 
 
 const usersRoute = express.Router();

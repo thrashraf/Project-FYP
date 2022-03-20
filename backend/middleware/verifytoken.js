@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-import React from "react";
+
 
 export const verifytoken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
