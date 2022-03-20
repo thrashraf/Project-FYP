@@ -57,10 +57,9 @@ export const loginUser = async (req, res) => {
 
     //User info
     const userInfo = checkExistingEmail[0]
-    const isvalid = bcrypt.compareSync(password, userInfo.password)
+    const isValid = bcrypt.compareSync(password, userInfo.password)
 
-    const token = jwt.sign({ id: userInfo.id }, process.env.TOKEN_SECRET)
-
+    
     if(!isValid){
       return res.status(400).json({
         message: "Incorrect Email or Password"
@@ -87,7 +86,7 @@ export const loginUser = async (req, res) => {
     res.status(200).json({ accessToken });
 
   } catch (error) {
-
+    console.log(error)
     res.status(404).json({ msg: "Email Not Found" });
   }
 };
