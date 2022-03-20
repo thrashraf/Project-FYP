@@ -12,7 +12,7 @@ export const Input = (props: props) => {
     <input
       type={props.type}
       placeholder={props.placeholder}
-      className="bg-blue-50 px-3 py-3 rounded-lg mt-5 outline-none"
+      className="bg-blue-50 px-3 py-3 rounded-lg outline-none w-full"
       value={props.value}
       onChange={props.onChange}
     />
