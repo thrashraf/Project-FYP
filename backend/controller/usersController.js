@@ -59,7 +59,7 @@ export const loginUser = async (req, res) => {
     const userInfo = checkExistingEmail[0]
     const isValid = bcrypt.compareSync(password, userInfo.password)
 
-    
+    console.log(isValid)
     if(!isValid){
       return res.status(400).json({
         message: "Incorrect Email or Password"
@@ -83,6 +83,11 @@ export const loginUser = async (req, res) => {
       }
     );
 
+    await user.updateRefreshToken(userInfo.id, refreshToken)
+      res.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000
+      })
     res.status(200).json({ accessToken });
 
   } catch (error) {
@@ -90,3 +95,16 @@ export const loginUser = async (req, res) => {
     res.status(404).json({ msg: "Email Not Found" });
   }
 };
+
+
+export const Logout = async(req, res) => {
+    const refreshToken = req.cookies.refreshToken;
+    if(!refreshToken) return res.sendStatus(204);
+    const user = await user.findRefreshToken(refreshToken)
+
+
+    if (!user[0]) return res.sendStatus(204); 
+      const userId = user[0].id;
+      await user.updateRefreshToken(userId);
+        
+    }
