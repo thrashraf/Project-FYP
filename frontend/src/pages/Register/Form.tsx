@@ -29,7 +29,7 @@ export const Form = () => {
     e.preventDefault();
  
     axios.post(
-        "/api/user/register",
+        "http://localhost:5000/api/user/register",
         { firstName, lastName, email, password },
         { withCredentials: true }
       )

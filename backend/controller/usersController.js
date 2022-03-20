@@ -10,7 +10,7 @@ export const registerUser = async (req, res) => {
 
     //get value from frontend 
     const { firstName, lastName, email, password } = req.body;
-
+    console.log(firstName, lastName, email, password)
     //create an unique id
     const id = crypto.randomBytes(16).toString("hex");
 
@@ -57,6 +57,7 @@ export const loginUser = async (req, res) => {
 
     //User info
     const userInfo = checkExistingEmail[0]
+
     const isValid = bcrypt.compareSync(password, userInfo.password)
 
     console.log(isValid)
