@@ -1,4 +1,5 @@
 import db from "../config/db.js";
+import { refreshToken } from "../controller/refreshToken.js";
 
 class user {
     static async checkEmail(email) {
@@ -17,11 +18,33 @@ class user {
             '${email}',
             '${password}',
             'staff'
+            
 
         )`;
         return db.execute(sql);
     }
-   
+
+    static async updateRefreshToken(id, refreshToken) {
+
+        const sql = `UPDATE users
+                    SET RefreshToken = '${refreshToken}'
+                    WHERE id =  '${id}'`;
+        return db.execute(sql);
+    }
+
+    static async findRefreshToken(refreshToken){
+
+        const sql = `SELECT * FROM USERS
+                    WHERE RefreshToken = '${refreshToken}' `
+        return db.execute(sql);
+    }
+
+    static async deleteRefreshToken(id){
+        const sql = `UPDATE USERS
+                    SET RefreshToken = '${null}'
+                    WHERE id = '${id}'`;
+    }
 }
+
 
 export default user;
