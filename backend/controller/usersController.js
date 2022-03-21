@@ -43,17 +43,30 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const [checkExistingEmail] = await user.checkEmail(email);
+<<<<<<< HEAD
     
     if (!checkExistingEmail) {
+=======
+    console.log(checkExistingEmail)
+
+
+    if (checkExistingEmail.length === 0) {
+>>>>>>> 2e96241c7fbaa2378c3731be2b10a8e124b2d8a3
       return res.status(400).json({
         message: "Incorrect Email or Password",
       });
     }
 
     //User info
+<<<<<<< HEAD
     const userInfo = checkExistingEmail[0];
 
     const isValid = bcrypt.compareSync(password, userInfo.password);
+=======
+    const userInfo = checkExistingEmail[0]
+    console.log(password, userInfo.password)
+    const isValid = bcrypt.compareSync(password, userInfo.password)
+>>>>>>> 2e96241c7fbaa2378c3731be2b10a8e124b2d8a3
 
     console.log(isValid);
     if (!isValid) {
@@ -86,8 +99,13 @@ export const loginUser = async (req, res) => {
     });
     res.status(200).json({ accessToken });
   } catch (error) {
+<<<<<<< HEAD
     console.log(error);
     res.status(404).json({ msg: "Email Not Found" });
+=======
+    console.log(error)
+    res.status(404).json({ message: "Email Not Found" });
+>>>>>>> 2e96241c7fbaa2378c3731be2b10a8e124b2d8a3
   }
 };
 
@@ -96,7 +114,24 @@ export const Logout = async (req, res) => {
   if (!refreshToken) return res.sendStatus(204);
   const user = await user.findRefreshToken(refreshToken);
 
+<<<<<<< HEAD
   if (!user[0]) return res.sendStatus(204);
   const userId = user[0].id;
   await user.updateRefreshToken(userId);
 };
+=======
+export const Logout = async(req, res) => {
+    const refreshToken = req.cookies.refreshToken;
+    if(!refreshToken) return res.sendStatus(204);
+    const user = await user.findRefreshToken(refreshToken)
+
+
+    if (!user[0]) return res.sendStatus(204); 
+      const userId = user[0].id;
+      await user.updateRefreshToken(userId);
+
+      res.clearCookie('refreshToken')
+      return res.sendStatus(200)
+        
+    }
+>>>>>>> 2e96241c7fbaa2378c3731be2b10a8e124b2d8a3
