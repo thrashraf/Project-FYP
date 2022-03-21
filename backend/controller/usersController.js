@@ -7,10 +7,9 @@ dotenv.config();
 
 export const registerUser = async (req, res) => {
   try {
-
-    //get value from frontend 
+    //get value from frontend
     const { firstName, lastName, email, password } = req.body;
-    console.log(firstName, lastName, email, password)
+    console.log(firstName, lastName, email, password);
     //create an unique id
     const id = crypto.randomBytes(16).toString("hex");
 
@@ -35,36 +34,45 @@ export const registerUser = async (req, res) => {
     res.status(200).json({
       message: "successful create!",
     });
-
-
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
 };
 
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const [checkExistingEmail] = await user.checkEmail(email);
-
-
+<<<<<<< HEAD
+    
     if (!checkExistingEmail) {
+=======
+    console.log(checkExistingEmail)
+
+
+    if (checkExistingEmail.length === 0) {
+>>>>>>> 2e96241c7fbaa2378c3731be2b10a8e124b2d8a3
       return res.status(400).json({
-        message: "Incorrect Email or Password"
-      })
+        message: "Incorrect Email or Password",
+      });
     }
 
     //User info
+<<<<<<< HEAD
+    const userInfo = checkExistingEmail[0];
+
+    const isValid = bcrypt.compareSync(password, userInfo.password);
+=======
     const userInfo = checkExistingEmail[0]
-
+    console.log(password, userInfo.password)
     const isValid = bcrypt.compareSync(password, userInfo.password)
+>>>>>>> 2e96241c7fbaa2378c3731be2b10a8e124b2d8a3
 
-    console.log(isValid)
-    if(!isValid){
+    console.log(isValid);
+    if (!isValid) {
       return res.status(400).json({
-        message: "Incorrect Email or Password"
-      })
+        message: "Incorrect Email or Password",
+      });
     }
 
     const accessToken = jwt.sign(
@@ -75,7 +83,7 @@ export const loginUser = async (req, res) => {
       }
     );
     console.log(accessToken);
-    
+
     const refreshToken = jwt.sign(
       { id: userInfo.id },
       process.env.REFRESH_TOKEN_SECRET,
@@ -84,20 +92,34 @@ export const loginUser = async (req, res) => {
       }
     );
 
-    await user.updateRefreshToken(userInfo.id, refreshToken)
-      res.cookie('refreshToken', refreshToken, {
-        httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000
-      })
+    await user.updateRefreshToken(userInfo.id, refreshToken);
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
     res.status(200).json({ accessToken });
-
   } catch (error) {
-    console.log(error)
+<<<<<<< HEAD
+    console.log(error);
     res.status(404).json({ msg: "Email Not Found" });
+=======
+    console.log(error)
+    res.status(404).json({ message: "Email Not Found" });
+>>>>>>> 2e96241c7fbaa2378c3731be2b10a8e124b2d8a3
   }
 };
 
+export const Logout = async (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) return res.sendStatus(204);
+  const user = await user.findRefreshToken(refreshToken);
 
+<<<<<<< HEAD
+  if (!user[0]) return res.sendStatus(204);
+  const userId = user[0].id;
+  await user.updateRefreshToken(userId);
+};
+=======
 export const Logout = async(req, res) => {
     const refreshToken = req.cookies.refreshToken;
     if(!refreshToken) return res.sendStatus(204);
@@ -107,5 +129,9 @@ export const Logout = async(req, res) => {
     if (!user[0]) return res.sendStatus(204); 
       const userId = user[0].id;
       await user.updateRefreshToken(userId);
+
+      res.clearCookie('refreshToken')
+      return res.sendStatus(200)
         
     }
+>>>>>>> 2e96241c7fbaa2378c3731be2b10a8e124b2d8a3
