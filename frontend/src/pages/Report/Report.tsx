@@ -46,7 +46,7 @@ const Report = (props: Props) => {
       </section>
 
       <section className="hidden lg:flex flex-col bg-gray-500 relative">
-        <div className=" w-[500px] h-[600px] bg-white absolute inset-x-10 inset-y-[5%] rounded-sm py-5 px-10 flex flex-col">
+        <div className=" w-[500px] h-[600px] bg-white absolute inset-x-10 inset-y-[5%] rounded-sm py-5 px-8 flex flex-col text-[12px]">
           
           <img src="/assets/logoPoli.png" alt="psmza" className="w-[150px] mx-auto" />
           
@@ -54,7 +54,7 @@ const Report = (props: Props) => {
             <h1 className=" uppercase font-medium underline text-[12px]">{title}</h1>
 
             <section className="mt-10">
-                <p className=" indent-8 ">{content}</p>
+                <p className=" indent-8">{content}</p>
             </section>
           </div>
 
