@@ -2,7 +2,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Login } from './pages/Login/Login'
 import Register from './pages/Register';
 import Report from './pages/Report';
+<<<<<<< HEAD
 import { Home } from './pages/Home/Home';
+=======
+import Admin from './pages/Admin';
+>>>>>>> origin/master
 
 function App() {
   return (
@@ -11,7 +15,11 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/create-report' element={<Report />} />
+<<<<<<< HEAD
         <Route path='/' element={<Home/>} />
+=======
+        <Route path='/admin' element={<Admin />} />
+>>>>>>> origin/master
       </Routes>
     </BrowserRouter>
   );
