@@ -47,9 +47,10 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const [checkExistingEmail] = await user.checkEmail(email);
+    console.log(checkExistingEmail)
 
 
-    if (!checkExistingEmail) {
+    if (checkExistingEmail.length === 0) {
       return res.status(400).json({
         message: "Incorrect Email or Password"
       })
@@ -57,7 +58,7 @@ export const loginUser = async (req, res) => {
 
     //User info
     const userInfo = checkExistingEmail[0]
-
+    console.log(password, userInfo.password)
     const isValid = bcrypt.compareSync(password, userInfo.password)
 
     console.log(isValid)
@@ -93,7 +94,7 @@ export const loginUser = async (req, res) => {
 
   } catch (error) {
     console.log(error)
-    res.status(404).json({ msg: "Email Not Found" });
+    res.status(404).json({ message: "Email Not Found" });
   }
 };
 
@@ -107,5 +108,8 @@ export const Logout = async(req, res) => {
     if (!user[0]) return res.sendStatus(204); 
       const userId = user[0].id;
       await user.updateRefreshToken(userId);
+
+      res.clearCookie('refreshToken')
+      return res.sendStatus(200)
         
     }

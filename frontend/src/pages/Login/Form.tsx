@@ -1,9 +1,18 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Toast from "../../components/Toast";
+
 
 export const Form = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const [status, setStatus] = useState<string>("");
+
+  const navigate = useNavigate();
+
+  const toastRef = useRef<any>(null);
 
   const onSubmithandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -12,14 +21,33 @@ export const Form = () => {
       .post("/api/user/login", { email, password }, { withCredentials: true })
       .then((res) => {
         console.log(res);
+        navigate('/')
       })
       .catch((err) => {
+        createUserHandler('error', err.response.data.message)
         console.log(err);
       });
   };
 
+    const createUserHandler = (status: string, message: string) =>{
+      if(toastRef.current !== null){
+        setStatus(status)
+        setMessage(message)
+        toastRef.current.showToast()
+      }
+    }
+
   return (
     <form onSubmit={onSubmithandler} action="" className=" flex flex-col mt-10">
+
+      <Toast 
+      
+      status = {status}
+      message = {message}
+      ref = {toastRef}
+      />
+
+
       <input
         type="text"
         placeholder="Email"
