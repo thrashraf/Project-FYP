@@ -43,7 +43,6 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const [checkExistingEmail] = await user.checkEmail(email);
-    console.log(checkExistingEmail);
 
     if (checkExistingEmail.length === 0) {
       return res.status(400).json({
@@ -52,9 +51,9 @@ export const loginUser = async (req, res) => {
     }
 
     //User info
-    const userInfo = checkExistingEmail[0];
 
-    const isValid = bcrypt.compareSync(password, userInfo.password);
+    const userInfo = checkExistingEmail[0]
+    const isValid = bcrypt.compareSync(password, userInfo.password)
 
     if (!isValid) {
       return res.status(400).json({});
@@ -84,7 +83,8 @@ export const loginUser = async (req, res) => {
     });
     res.status(200).json({ accessToken });
   } catch (error) {
-    console.log(error);
+
+    console.log(error)
     res.status(404).json({ message: "Email Not Found" });
   }
 
