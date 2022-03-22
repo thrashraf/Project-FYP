@@ -9,14 +9,15 @@ class user {
 
   static async register(id, firstName, email, password) {
     const sql = `INSERT INTO
-            users (id, name, email, password, role)
+            users (id, name, email, password, role, RefreshToken)
         VALUES
         (
             '${id}', 
             '${firstName}',
             '${email}',
             '${password}',
-            'staff'
+            'staff',
+            '${null}'
             
 
         )`;
@@ -41,7 +42,12 @@ class user {
                     SET RefreshToken = '${null}'
                     WHERE id = '${id}'`;
     return db.execute(sql);
-  } 
+  }
+
+  static async getAllUser() {
+    const sql = `SELECT * FROM users`
+    return db.execute(sql); 
+  }
 }
 
 export default user;

@@ -40,7 +40,7 @@ export const Sidebar = (props: Props) => {
 
   return (
     <>
-      <div className={`w-64 absolute sm:relative bg-gray-900 shadow  flex-col justify-between flex sm:flex h-screen  ${showNav ? null : '-translate-x-[100%]'} transition-all ease-in-out delay-100`}>
+      <div className={`w-64 bg-gray-900 shadow  flex-col justify-between flex sm:flex h-screen absolute lg:relative ${showNav ? null : '-translate-x-[100%]'} transition-all ease-in-out delay-100`}>
         <div>
           {/* <div className="h-16 w-full flex items-center px-8">
                         logo
