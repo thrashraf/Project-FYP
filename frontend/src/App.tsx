@@ -7,15 +7,21 @@ import Admin from './pages/Admin';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/create-report' element={<Report />} />
-        <Route path='/' element={<Home/>} />
-        <Route path='/admin' element={<Admin />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/create-report' element={<Report />} />
+          <Route path='/' element={<Home/>} />
+          <Route path='/admin' element={<Admin />} />
+        </Routes>
+      </BrowserRouter>
+
+      
+    </>
+
+
   );
 }
 

@@ -47,9 +47,9 @@ export const Sidebar = (props: Props) => {
                     </div> */}
 
           <ul className="mt-5">
-            {nav?.map((item) => {
+            {nav?.map((item, index) => {
               return (
-                <li className="flex w-full justify-between text-gray-600 hover:text-gray-300 hover:bg-indigo-800 cursor-pointer items-center py-3 px-8">
+                <li className="flex w-full justify-between text-gray-600 hover:text-gray-300 hover:bg-indigo-800 cursor-pointer items-center py-3 px-8" key={index}>
                   <div className="flex items-center">
                     {item.icon}
                     <span className="text-sm  ml-2">{item.name}</span>

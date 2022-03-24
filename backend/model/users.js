@@ -7,19 +7,17 @@ class user {
     return db.execute(sql);
   }
 
-  static async register(id, firstName, email, password) {
+  static async register(firstName, lastName, email, password) {
     const sql = `INSERT INTO
-            users (id, name, email, password, role, RefreshToken)
+            users (name, email, password, role, RefreshToken, profile_picture)
         VALUES
         (
-            '${id}', 
             '${firstName}',
             '${email}',
             '${password}',
             'staff',
+            '${null}',
             '${null}'
-            
-
         )`;
     return db.execute(sql);
   }

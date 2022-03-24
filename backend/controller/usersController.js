@@ -9,9 +9,7 @@ export const registerUser = async (req, res) => {
   try {
     //get value from frontend
     const { firstName, lastName, email, password } = req.body;
-    console.log(firstName, lastName, email, password);
-    //create an unique id
-    const id = crypto.randomBytes(16).toString("hex");
+    //console.log(firstName, lastName, email, password);
 
     //want to check if user exist
     const [checkExistingEmail] = await user.checkEmail(email);
@@ -28,10 +26,10 @@ export const registerUser = async (req, res) => {
     const hashPassword = bcrypt.hashSync(password);
 
     //create user
-    await user.register(id, firstName, email, hashPassword);
+    await user.register(firstName, lastName, email, hashPassword);
 
     //response successful create user 🎉
-    res.status(200).json({
+    res.status(200).json({ 
       message: "successful create!",
     });
   } catch (error) {
@@ -81,7 +79,9 @@ export const loginUser = async (req, res) => {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
+
     res.status(200).json({ accessToken });
+
   } catch (error) {
 
     console.log(error)
@@ -99,6 +99,7 @@ export const getAllUser = async(req, res) => {
     })
 
   } catch (error) {
+    console.log(error)
     res.status(400).json({message: 'Something went wrong 🤔'});
   }
 }

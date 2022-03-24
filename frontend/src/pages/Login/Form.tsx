@@ -69,6 +69,17 @@ export const Form = () => {
       <button className="mt-10 bg-blue-500 text-white px-3 py-3 rounded-lg">
         Login
       </button>
+
+      <p className="mt-10 text-center">
+        doesn't have an account?
+        <span
+          className=" underline text-blue-500 ml-2 cursor-pointer"
+          onClick={() => navigate("/register")}
+        >
+          Register
+        </span>
+      </p>
+      
     </form>
   );
 };
