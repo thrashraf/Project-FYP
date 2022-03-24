@@ -47,9 +47,9 @@ export const Sidebar = (props: Props) => {
                     </div> */}
 
           <ul className="mt-5">
-            {nav?.map((item, index) => {
+            {nav?.map((item) => {
               return (
-                <li className="flex w-full justify-between text-gray-600 hover:text-gray-300 hover:bg-indigo-800 cursor-pointer items-center py-3 px-8" key={index}>
+                <li className="flex w-full justify-between text-gray-600 hover:text-gray-300 hover:bg-indigo-800 cursor-pointer items-center py-3 px-8" key={item.name}>
                   <div className="flex items-center">
                     {item.icon}
                     <span className="text-sm  ml-2">{item.name}</span>
@@ -77,9 +77,9 @@ export const Sidebar = (props: Props) => {
         <div className="px-8 bg-gray-900">
           <ul className="w-full flex items-center justify-between ">
             {[<Notification />, <User />, <Setting />, <Logout />].map(
-              (item) => {
+              (item, index) => {
                 return (
-                  <li className="cursor-pointer text-white pt-5 pb-3">
+                  <li className="cursor-pointer text-white pt-5 pb-3" key={index}>
                     {item}
                   </li>
                 );

@@ -51,7 +51,7 @@ const Admin = () => {
       </div>
       {/* Sidebar ends */}
         
-        <Modal show={showModal} modalHandler={modalHandler} user={user} />
+        <Modal show={showModal} modalHandler={modalHandler} user={user} allUser={allUser} setAllUser={setAllUser}/>
 
       {/* Remove class [ h-64 ] when adding a card block */}
       <div className="py-5 md:w-4/5 w-11/12 ">

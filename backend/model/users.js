@@ -1,5 +1,4 @@
 import db from "../config/db.js";
-import { refreshToken } from "../controller/refreshToken.js";
 
 class user {
   static async checkEmail(email) {
