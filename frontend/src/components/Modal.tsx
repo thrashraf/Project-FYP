@@ -11,6 +11,7 @@ type Props = {
 };
 
 export const Modal = (props: Props) => {
+  
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [role, setRole] = useState<string>("");
