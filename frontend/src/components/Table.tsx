@@ -5,6 +5,7 @@ type Props = {
   showMore: string;
   showMoreHandler: (id: string, user: object) => void;
   modalHandler: () => void;
+  notificationHandler: () => void;
 };
 
 export const Table = (props: Props) => {
@@ -109,11 +110,9 @@ export const Table = (props: Props) => {
                         >
                           Edit
                         </li>
-                        <li className="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">
+                        <li className="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal" 
+                        onClick={props.notificationHandler}>
                           Delete
-                        </li>
-                        <li className="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">
-                          Duplicate
                         </li>
                       </ul>
                     </div>

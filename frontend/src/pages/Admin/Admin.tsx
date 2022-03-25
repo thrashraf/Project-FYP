@@ -3,6 +3,7 @@ import { Table } from "../../components/Table";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Modal } from '../../components/Modal';
+import { DeleteNotification } from './DeleteNotification';
 
 interface User {
     id: string;
@@ -21,6 +22,9 @@ const Admin = () => {
 
   //? show Modal
   const [showModal, setShowModal] = useState<boolean>(false);
+
+  //? show delete notification
+  const [showNotification, setShowNotification] = useState<boolean>(false);
 
   //show one detail user to pass into modal
   const [user, setUser] = useState<Object>({})
@@ -42,6 +46,10 @@ const Admin = () => {
     setShowModal(!showModal)
   };
 
+  const notificationHandler = () => {
+    setShowNotification(!showNotification)
+  };
+
   return (
       <div className="flex flex-no-wrap " >
       {/* Sidebar starts */}
@@ -51,12 +59,13 @@ const Admin = () => {
       </div>
       {/* Sidebar ends */}
         
-        <Modal show={showModal} modalHandler={modalHandler} user={user} allUser={allUser} setAllUser={setAllUser}/>
+      <Modal show={showModal} modalHandler={modalHandler} user={user} allUser={allUser} setAllUser={setAllUser}/>
+      <DeleteNotification show={showNotification} notificationHandler={notificationHandler} id={showMore} allUser={allUser} setAllUser={setAllUser}/>
 
       {/* Remove class [ h-64 ] when adding a card block */}
       <div className="py-5 md:w-4/5 w-11/12 ">
         {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
-        <Table allUser={allUser} showMore={showMore} showMoreHandler={showMoreHandler} modalHandler={modalHandler}/>
+        <Table allUser={allUser} showMore={showMore} showMoreHandler={showMoreHandler} modalHandler={modalHandler} notificationHandler={notificationHandler}/>
       </div>
     </div>
   );

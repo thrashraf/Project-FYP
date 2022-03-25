@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 type Props = {
   show: boolean;
   user: any;
-  allUser: any,
+  allUser: any;
   // eslint-disable-next-line no-empty-pattern
   setAllUser: ([]) => void;
   modalHandler: () => void;
-
 };
 
 export const Modal = (props: Props) => {
@@ -30,20 +29,26 @@ export const Modal = (props: Props) => {
     //? to prevent refresh
     e.preventDefault();
 
+    const updateEndpoint =
+      password.length > 0
+        ? "/api/admin/updateUserWithPassword"
+        : "/api/admin/updateUser";
+
     const id = props.user.id;
-    const profile_picture = props.user.profile_picture
+    const profile_picture = props.user.profile_picture;
 
     axios
       .post(
-        "/api/admin/updateUser",
-        { id, name, email, role },
+        updateEndpoint,
+        { id, name, email, role, password},
         { withCredentials: true }
       )
       .then((res) => {
-
-        const currentUpdatedUser = { id, name, email, role, profile_picture }
+        const currentUpdatedUser = { id, name, email, role, profile_picture };
         //find index based on user id
-        const index = props.allUser.findIndex((userId: any) => userId.id === id );
+        const index = props.allUser.findIndex(
+          (userId: any) => userId.id === id
+        );
         //copy all user array
         const updatedUsers = [...props.allUser];
         updatedUsers[index] = currentUpdatedUser;
