@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Login } from './pages/Login/Login'
-import Register from './pages/Register';
-import Report from './pages/Report';
-import { Home } from './pages/Home/Home';
-import Admin from './pages/Admin';
+import { Login } from '../pages/Login/Login'
+import Register from '../pages/Register';
+import Report from '../pages/Report';
+import { Home } from '../pages/Home/Home';
+import Admin from '../pages/Admin';
 
 function App() {
   return (
@@ -17,11 +17,7 @@ function App() {
           <Route path='/admin' element={<Admin />} />
         </Routes>
       </BrowserRouter>
-
-      
     </>
-
-
   );
 }
 
