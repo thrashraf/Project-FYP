@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "../../components/Input";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Toast from "../../components/Toast";
+import { useAppSelector, useAppDispatch } from '../../app/hooks'
+import { userSelector, signupUser } from "../../features/user/User";
 
 export const Form = () => {
   // create an instance for useNavigate
@@ -11,11 +12,25 @@ export const Form = () => {
   //to create references for Html Input Element
   const toastRef = useRef<any>(null);
 
+  const dispatch = useAppDispatch();
+
+  const { isFetching, isSuccess, isError, errorMessage } = useAppSelector(userSelector)
+
   // state
-  const [firstName, setFirstName] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+ 
+  useEffect(() => {
+    if (isSuccess) {
+      createUserHandler("success", 'successful register! please login');
+    }
+    if (isError) {
+      createUserHandler("error", errorMessage);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, isError]);
 
   // toast state
   const [status, setStatus] = useState<string>("success");
@@ -26,22 +41,13 @@ export const Form = () => {
     //? to prevent refresh after submit
     e.preventDefault();
 
-    axios
-      .post(
-        "http://localhost:5000/api/user/register",
-        { firstName, lastName, email, password },
-        { withCredentials: true }
-      )
-      .then((res) => {
-        console.log(res);
-        createUserHandler("success", res.data.message);
-        console.log(res);
-        //navigate('/login')
-      })
-      .catch((err) => {
-        createUserHandler("error", err.response.data.message);
-        console.log(err);
-      });
+    const data = {
+      name,
+      email,
+      password
+    }
+
+    dispatch(signupUser(data))
   };
 
   const createUserHandler = (status: string, message: string) => {
@@ -60,8 +66,8 @@ export const Form = () => {
         <Input
           type="text"
           placeholder="First Name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
 
         <Input

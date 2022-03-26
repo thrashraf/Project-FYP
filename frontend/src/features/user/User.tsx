@@ -1,5 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { RootState } from "../../app/Store";
+interface user {
+    name: string,
+    email: string,
+    password: string
+}
 
 export const userSlice = createSlice({
     name: "user",
@@ -17,11 +22,56 @@ export const userSlice = createSlice({
         logout: (state) => {
             state.user = null
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(signupUser.fulfilled, (state, { payload }: any) => {
+            state.isFetching = false;
+            state.isSuccess = true;
+        })
+        builder.addCase(signupUser.pending, (state) => {
+            state.isFetching = true;
+        })
+        builder.addCase(signupUser.rejected, (state, { payload }: any) => {
+            state.isFetching = false;
+            state.isError = true;
+            state.errorMessage = payload.message;
+        })
     }
 });
 
+export const signupUser = createAsyncThunk(
+    "users/signupUser",
+    async ({ name, email, password }: user, thunkAPI) => {
+      try {
+        const response = await fetch(
+          "/api/user/register",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              password,
+            }),
+          }
+        )
+        let data = await response.json()
+        
+        if (response.status === 200) {
+          console.log("data", data)
+        } else {
+          return thunkAPI.rejectWithValue(data)
+        }
+      } catch (e: any) {
+        console.log("Error", e.response.data)
+        return thunkAPI.rejectWithValue(e.response.data)
+      }
+    }
+)
+
 export const { login, logout } = userSlice.actions;
-
-export const selectUser = (state: RootState) => state.user.user;
-
+export const userSelector = (state: RootState) => state.user;
 export default userSlice.reducer;
