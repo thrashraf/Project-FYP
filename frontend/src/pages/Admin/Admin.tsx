@@ -14,8 +14,6 @@ const Admin = () => {
           <Sidebar setTabs={setTabs} tabs={tabs}/>
         </div>
         {/* Sidebar ends */}
-        
-       
         <Users tabs={tabs}/>
 
     </div>

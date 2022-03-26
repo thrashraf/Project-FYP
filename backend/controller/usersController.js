@@ -1,5 +1,4 @@
 import user from "../model/users.js";
-import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
@@ -44,17 +43,16 @@ export const loginUser = async (req, res) => {
 
     if (checkExistingEmail.length === 0) {
       return res.status(400).json({
-        message: "Incorrect Email or Password",
+        message: "Incorrect password",
       });
     }
 
     //User info
-
     const userInfo = checkExistingEmail[0]
     const isValid = bcrypt.compareSync(password, userInfo.password)
 
     if (!isValid) {
-      return res.status(400).json({});
+      return res.status(400).json({message: "Incorrect password"});
     }
 
     const accessToken = jwt.sign(
@@ -85,7 +83,7 @@ export const loginUser = async (req, res) => {
   } catch (error) {
 
     console.log(error)
-    res.status(404).json({ message: "Email Not Found" });
+    res.status(404).json({ message: "Incorrect password" });
   }
 
 };

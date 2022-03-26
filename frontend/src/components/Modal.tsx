@@ -131,7 +131,7 @@ export const Modal = (props: Props) => {
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                 >
-                  <option selected disabled>
+                  <option disabled>
                     Role
                   </option>
                   <option>Staff</option>
