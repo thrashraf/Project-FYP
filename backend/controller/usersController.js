@@ -7,7 +7,12 @@ dotenv.config();
 export const registerUser = async (req, res) => {
   try {
     //get value from frontend
-    const { firstName, lastName, email, password } = req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      password
+    } = req.body;
     //console.log(firstName, lastName, email, password);
 
     //want to check if user exist
@@ -28,7 +33,7 @@ export const registerUser = async (req, res) => {
     await user.register(firstName, lastName, email, hashPassword);
 
     //response successful create user 🎉
-    res.status(200).json({ 
+    res.status(200).json({
       message: "successful create!",
     });
   } catch (error) {
@@ -38,9 +43,17 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    let route;
+
+    const {
+      email,
+      password
+    } = req.body;
+
+    //check for existing email
     const [checkExistingEmail] = await user.checkEmail(email);
 
+    //thrown error if not found any
     if (checkExistingEmail.length === 0) {
       return res.status(400).json({
         message: "Incorrect password",
@@ -49,25 +62,35 @@ export const loginUser = async (req, res) => {
 
     //User info
     const userInfo = checkExistingEmail[0]
+
+    //compare password with req.password and database password
+    //will return boolean
     const isValid = bcrypt.compareSync(password, userInfo.password)
 
+    //thrown error if false
     if (!isValid) {
-      return res.status(400).json({message: "Incorrect password"});
+      return res.status(400).json({
+        message: "Incorrect password"
+      });
     }
 
-    const accessToken = jwt.sign(
-      { id: userInfo.id },
-      process.env.ACCESS_TOKEN_SECRET,
-      {
+    //generate token if true
+    const accessToken = jwt.sign({
+        id: userInfo.id
+      },
+      process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "20s",
       }
     );
     console.log(accessToken);
 
-    const refreshToken = jwt.sign(
-      { id: userInfo.id },
-      process.env.REFRESH_TOKEN_SECRET,
-      {
+    const refreshToken = jwt.sign({
+        id: userInfo.id,
+        name: userInfo.name,
+        email: userInfo.email,
+        profile_picture: userInfo.profile_picture
+      },
+      process.env.REFRESH_TOKEN_SECRET, {
         expiresIn: "1d",
       }
     );
@@ -78,17 +101,31 @@ export const loginUser = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.status(200).json({ accessToken });
+    //create dynamic routes based on role
+    if (userInfo.role === 'Admin') {
+      route = '/admin'
+    } else if (userInfo.role === 'HD') {
+      route = '/head-department'
+    } else {
+      route = '/'
+    }
+
+    res.status(200).json({
+      accessToken,
+      route
+    });
 
   } catch (error) {
 
     console.log(error)
-    res.status(404).json({ message: "Incorrect password" });
+    res.status(404).json({
+      message: "Incorrect password"
+    });
   }
 
 };
 
-export const getAllUser = async(req, res) => {
+export const getAllUser = async (req, res) => {
   try {
     const [allUser] = await user.getAllUser();
 
@@ -98,7 +135,9 @@ export const getAllUser = async(req, res) => {
 
   } catch (error) {
     console.log(error)
-    res.status(400).json({message: 'Something went wrong 🤔'});
+    res.status(400).json({
+      message: 'Something went wrong 🤔'
+    });
   }
 }
 

@@ -21,7 +21,8 @@ export const Form = () => {
       .post("/api/user/login", { email, password }, { withCredentials: true })
       .then((res) => {
         console.log(res);
-        navigate('/')
+        console.log(res.data.route);
+        navigate(res.data.route);
       })
       .catch((err) => {
         createUserHandler('error', err.response.data.message)
@@ -47,7 +48,6 @@ export const Form = () => {
       ref = {toastRef}
       />
 
-
       <input
         type="text"
         placeholder="Email"
@@ -62,8 +62,8 @@ export const Form = () => {
         className=" bg-blue-100 px-3 py-3 rounded-lg mt-5 outline-none"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <a href="" className=" text-center mt-5 text-blue-500">
-        Forgot Password?
+      <a href="/something" className=" text-center mt-5 text-blue-500">
+        Forgot Password? 
       </a>
 
       <button className="mt-10 bg-blue-500 text-white px-3 py-3 rounded-lg">
