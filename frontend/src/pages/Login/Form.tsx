@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Toast from "../../components/Toast";
 
@@ -11,8 +12,9 @@ export const Form = () => {
   const [status, setStatus] = useState<string>("");
 
   const navigate = useNavigate();
-
   const toastRef = useRef<any>(null);
+  
+  const dispatch = useDispatch()
 
   const onSubmithandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -21,7 +23,8 @@ export const Form = () => {
       .post("/api/user/login", { email, password }, { withCredentials: true })
       .then((res) => {
         console.log(res);
-        navigate('/')
+        console.log(res.data.route);
+        navigate(res.data.route);
       })
       .catch((err) => {
         createUserHandler('error', err.response.data.message)
@@ -47,7 +50,6 @@ export const Form = () => {
       ref = {toastRef}
       />
 
-
       <input
         type="text"
         placeholder="Email"
@@ -62,13 +64,24 @@ export const Form = () => {
         className=" bg-blue-100 px-3 py-3 rounded-lg mt-5 outline-none"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <a href="" className=" text-center mt-5 text-blue-500">
-        Forgot Password?
+      <a href="/something" className=" text-center mt-5 text-blue-500">
+        Forgot Password? 
       </a>
 
       <button className="mt-10 bg-blue-500 text-white px-3 py-3 rounded-lg">
         Login
       </button>
+
+      <p className="mt-10 text-center">
+        doesn't have an account?
+        <span
+          className=" underline text-blue-500 ml-2 cursor-pointer"
+          onClick={() => navigate("/register")}
+        >
+          Register
+        </span>
+      </p>
+      
     </form>
   );
 };
