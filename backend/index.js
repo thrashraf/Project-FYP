@@ -10,6 +10,7 @@ const port = 5000 || process.env.PORT;
 
 //* import route
 import usersRoute from './router/usersRoute.js';
+import adminRoute from './router/adminRoute.js';
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use('/api', usersRoute);
+app.use('/api', usersRoute, adminRoute);
 
 
 app.listen(port, console.log(`server running on port ${port}`))
