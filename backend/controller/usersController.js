@@ -8,8 +8,7 @@ export const registerUser = async (req, res) => {
   try {
     //get value from frontend
     const {
-      firstName,
-      lastName,
+      name,
       email,
       password
     } = req.body;
