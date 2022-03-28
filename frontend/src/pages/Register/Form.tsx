@@ -73,7 +73,7 @@ export const Form = () => {
       <section className="my-2.5">
         <Input
           type="text"
-          placeholder="First Name"
+          placeholder="Full Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
