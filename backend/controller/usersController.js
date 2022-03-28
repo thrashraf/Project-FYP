@@ -8,8 +8,7 @@ export const registerUser = async (req, res) => {
   try {
     //get value from frontend
     const {
-      firstName,
-      lastName,
+      name,
       email,
       password
     } = req.body;
@@ -29,8 +28,10 @@ export const registerUser = async (req, res) => {
     //hash user password
     const hashPassword = bcrypt.hashSync(password);
 
+    console.log(hashPassword)
+
     //create user
-    await user.register(firstName, lastName, email, hashPassword);
+    await user.register(name, email, hashPassword);
 
     //response successful create user 🎉
     res.status(200).json({
