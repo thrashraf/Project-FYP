@@ -227,11 +227,7 @@ export const Navbar = (props: Props) => {
                             <div className="relative mr-6 ">
                                 <button className="focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">LOGOUT</button>
                             </div>
-<<<<<<< HEAD
                             <div id="menu" className="text-gray-800" onClick={() => setShow(true)}>
-=======
-                            <div id="menu" className="text-gray-800" onClick={() => setShow(true)} >
->>>>>>> 97e2f88f7ac6d1ecfc2f2fc066c608cc42304182
                                 {show ? (
                                     ""
                                 ) : (
@@ -246,15 +242,9 @@ export const Navbar = (props: Props) => {
                         </div>
                     </div>
                     {/*Mobile responsive sidebar*/}
-<<<<<<< HEAD
                     <div className={show ? "w-full xl:hidden h-full absolute z-40  transform  translate-x-0 " : "   w-full xl:hidden h-full absolute z-40  transform -translate-x-full"}>
                         <div className="bg-gray-800 opacity-50 w-full h-full" onClick={() => setShow(false)} />
                         <div className="w-64 z-40 fixed overflow-y-auto z-40 top-0 bg-white shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out">
-=======
-                    <div className={show ? "w-full lg:hidden h-full absolute z-40  transform  translate-x-0 " : "   w-full lg:hidden h-full absolute z-40  transform -translate-x-full"}>
-                        <div className="bg-gray-800 opacity-50 w-full h-full"  />
-                        <div className="w-64 z-40 fixed overflow-y-auto z-40 top-0 bg-white shadow h-full flex-col justify-between lg:hidden pb-4 transition duration-150 ease-in-out">
->>>>>>> 97e2f88f7ac6d1ecfc2f2fc066c608cc42304182
                             <div className="px-6 h-full">
                                 <div className="flex flex-col justify-between h-full w-full">
                                     <div>
@@ -271,11 +261,7 @@ export const Navbar = (props: Props) => {
                                                     </svg> */}
                                                     {/* <p className="text-base md:text-2xl text-gray-800 ml-3">The North</p> */}
                                                 </div>
-<<<<<<< HEAD
                                                 <div id="cross" className="text-gray-800" onClick={() => setShow(false)} >
-=======
-                                                <div id="cross" className="text-gray-800" onClick={() => setShow(false)}>
->>>>>>> 97e2f88f7ac6d1ecfc2f2fc066c608cc42304182
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-x" width={24} height={24} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                         <path stroke="none" d="M0 0h24v24H0z" />
                                                         <line x1={18} y1={6} x2={6} y2={18} />
