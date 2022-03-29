@@ -6,12 +6,13 @@ class user {
     return db.execute(sql);
   }
 
-  static async register(firstName, lastName, email, password) {
+  static async register(name, email, password) {
+
     const sql = `INSERT INTO
             users (name, email, password, role, RefreshToken, profile_picture)
         VALUES
         (
-            '${firstName}',
+            '${name}',
             '${email}',
             '${password}',
             'staff',

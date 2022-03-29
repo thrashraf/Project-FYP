@@ -27,16 +27,8 @@ export const Sidebar = (props: Props) => {
       name: "User",
     },
     {
-      icon: <Achievement />,
-      name: "Achievement",
-    },
-    {
-      icon: <Innovation />,
-      name: "Innovation",
-    },
-    {
       icon: <Report />,
-      name: "Report",
+      name: "Activities ",
     },
   ];
 
@@ -73,7 +65,7 @@ export const Sidebar = (props: Props) => {
             })}
           </ul>
           {/* profile */}
-          <div className="flex items-center mb-4 px-8 absolute bottom-10 ">
+          {/* <div className="flex items-center mb-4 px-8 absolute bottom-10 ">
             <div className="w-10 h-10 bg-cover rounded-md mr-3">
               <img
                 src="https://tuk-cdn.s3.amazonaws.com/assets/components/avatars/a_5.png"
@@ -85,7 +77,7 @@ export const Sidebar = (props: Props) => {
               <p className="text-gray-600 text-sm font-medium">Steve Doe</p>
               <p className="text-gray-600 text-xs">View Profile</p>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="px-8 bg-gray-900">
           <ul className="w-full flex items-center justify-between ">

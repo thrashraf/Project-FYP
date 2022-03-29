@@ -3,24 +3,23 @@ import React, { useState } from "react";
 type Props = {}
 
 export const Navbar = (props: Props) => {
-    const [show, setShow] = useState(null);
+    const [show, setShow] = useState(false);
     const [profile, setProfile] = useState(false);
     const [product, setProduct] = useState(false);
     const [deliverables, setDeliverables] = useState(false);
 
   return (
-    
         <>
             <div className="bg-gray-200 h-full w-full">
                 {/* Code block starts */}
-                <nav className=" bg-gray-900 shadow xl:block hidden">
-                    <div className="mx-auto container px-6 py-2 xl:py-0">
+                <nav className=" bg-gray-900 shadow lg:block hidden">
+                    <div className="mx-auto container px-6 py-2 lg:py-0">
                         <div className="flex items-center justify-between">
-                            <div className="inset-y-0 left-0 flex items-center xl:hidden">
+                            <div className="inset-y-0 left-0 flex items-center lg:hidden">
                                 <div className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-100 focus:outline-none transition duration-150 ease-in-out">
-                                    <div className="visible xl:hidden">
+                                    <div className="visible lg:hidden">
                                         <ul className="p-2 border-r bg-white absolute rounded left-0 right-0 shadow mt-8 md:mt-8 hidden">
-                                            <li className="flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                            <li className="flex lg:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                                 <div className="flex items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                         <path stroke="none" d="M0 0h24v24H0z" />
@@ -32,7 +31,7 @@ export const Navbar = (props: Props) => {
                                                     <span className="ml-2 font-bold">Dashboard</span>
                                                 </div>
                                             </li>
-                                            <li className="flex xl:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex justify-center">
+                                            <li className="flex lg:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex justify-center">
                                                 <div className="flex items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-puzzle" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                         <path stroke="none" d="M0 0h24v24H0z" />
@@ -41,7 +40,7 @@ export const Navbar = (props: Props) => {
                                                     <span className="ml-2 font-bold">Products</span>
                                                 </div>
                                             </li>
-                                            <li className="flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                                            <li className="flex lg:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-compass" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" />
                                                     <polyline points="8 16 10 10 16 8 14 14 8 16" />
@@ -49,7 +48,7 @@ export const Navbar = (props: Props) => {
                                                 </svg>
                                                 <span className="ml-2 font-bold">Performance</span>
                                             </li>
-                                            <li className="border-b border-gray-300 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-4 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                                            <li className="border-b border-gray-300 flex lg:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-4 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-code" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" />
                                                     <polyline points="7 8 3 12 7 16" />
@@ -100,7 +99,7 @@ export const Navbar = (props: Props) => {
                             </div>
                             <div className="flex w-full sm:w-auto items-center sm:items-stretch justify-end sm:justify-start">
                                 <div className="flex items-center">
-                                    {/* <svg aria-label="Home" id="logo" enableBackground="new 0 0 300 300" height={44} viewBox="0 0 300 300" width={43} xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+                                    {/* <svg aria-label="Home" id="logo" enableBackground="new 0 0 300 300" height={44} viewBox="0 0 300 300" width={43} xmlns="http://www.w3.org/2000/svg" xmlnslgink="http://www.w3.org/1999/lgink">
                                         <g>
                                             <path
                                                 fill="#4c51bf"
@@ -113,7 +112,7 @@ export const Navbar = (props: Props) => {
                                 </div>
                             </div>
                             <div className="flex">
-                                <div className="hidden xl:flex md:mr-6 xl:mr-16">
+                                <div className="hidden lg:flex md:mr-6 lg:mr-16">
                                     <a href="javascript: void(0)" className="flex px-5 items-center py-6 text-sm leading-5 text-white hover:bg-purple-800 focus:bg-gray-100 focus:text-black  focus:outline-none transition duration-150 ease-in-out">
                                         <span className="mr-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -157,7 +156,7 @@ export const Navbar = (props: Props) => {
                                         About Us
                                     </a>
                                 </div>
-                                <div className="hidden xl:flex items-center">
+                                <div className="hidden lg:flex items-center">
                                     <div className="relative md:mr-6 my-2">
                                         <button className="focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-purple-800 hover:text-white rounded text-gray-600 px-5 py-2 text-xs">LOGOUT</button>
                                     </div>
@@ -211,7 +210,7 @@ export const Navbar = (props: Props) => {
                     </div>
                 </nav>
                 <nav>
-                    <div className="py-4 px-6 w-full flex xl:hidden justify-between items-center bg-white fixed top-0 z-40">
+                    <div className="py-4 px-6 w-full flex lg:hidden justify-between items-center bg-white fixed top-0 z-40">
                         <div className="w-24">
                             <svg xmlns="http://www.w3.org/2000/svg" width={43} height={44} viewBox="0 0 43 44" fill="none">
                                 <path
@@ -226,7 +225,7 @@ export const Navbar = (props: Props) => {
                             <div className="relative mr-6 ">
                                 <button className="focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">LOGOUT</button>
                             </div>
-                            <div id="menu" className="text-gray-800" >
+                            <div id="menu" className="text-gray-800" onClick={() => setShow(true)} >
                                 {show ? (
                                     ""
                                 ) : (
@@ -241,9 +240,9 @@ export const Navbar = (props: Props) => {
                         </div>
                     </div>
                     {/*Mobile responsive sidebar*/}
-                    <div className={show ? "w-full xl:hidden h-full absolute z-40  transform  translate-x-0 " : "   w-full xl:hidden h-full absolute z-40  transform -translate-x-full"}>
+                    <div className={show ? "w-full lg:hidden h-full absolute z-40  transform  translate-x-0 " : "   w-full lg:hidden h-full absolute z-40  transform -translate-x-full"}>
                         <div className="bg-gray-800 opacity-50 w-full h-full"  />
-                        <div className="w-64 z-40 fixed overflow-y-auto z-40 top-0 bg-white shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out">
+                        <div className="w-64 z-40 fixed overflow-y-auto z-40 top-0 bg-white shadow h-full flex-col justify-between lg:hidden pb-4 transition duration-150 ease-in-out">
                             <div className="px-6 h-full">
                                 <div className="flex flex-col justify-between h-full w-full">
                                     <div>
@@ -260,7 +259,7 @@ export const Navbar = (props: Props) => {
                                                     </svg>
                                                     {/* <p className="text-base md:text-2xl text-gray-800 ml-3">The North</p> */}
                                                 </div>
-                                                <div id="cross" className="text-gray-800" >
+                                                <div id="cross" className="text-gray-800" onClick={() => setShow(false)}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-x" width={24} height={24} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                         <path stroke="none" d="M0 0h24v24H0z" />
                                                         <line x1={18} y1={6} x2={6} y2={18} />
