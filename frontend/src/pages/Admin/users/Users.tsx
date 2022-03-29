@@ -10,7 +10,7 @@ interface User {
   name: string;
   email: string;
   role: string;
-}
+} 
 
 type props = {
   tabs: number
