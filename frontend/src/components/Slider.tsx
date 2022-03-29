@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 
+
+
+
 const featuredProducts = [
     "/assets/1.jpg",
     "/assets/2.jpg",
@@ -26,12 +29,8 @@ export default function Slider () {
         if(slideRef.current !== null){
 
             
-            slideRef.current.addEventListener
-            ('animationend', removeAnimation)
-            slideRef.current.addEventListener
-            ('mouseenter', pauseSlider)
-            slideRef.current.addEventListener
-            ('mouseleave', startSlider)
+            // slideRef.current.addEventListener
+            // ('animationend', removeAnimation)
             startSlider();
         }
 
@@ -42,11 +41,8 @@ export default function Slider () {
                 handleOnNextClick();
             }, 3000);
         };
-    
-        const pauseSlider = () => {
-            clearInterval(slideInterval)
-        }
-    
+
+
 
         const handleOnNextClick = () => {
             if(slideRef.current !== null){
@@ -64,7 +60,7 @@ export default function Slider () {
             if(slideRef.current !== null){
             const productsLength = featuredProducts.
             length;
-            count = (currentIndex + productsLength - 1) % productsLength;
+            // count = (currentIndex + productsLength - 1) % productsLength;
             setCurrentIndex(count);
             slideRef.current.classList.add
             ("fade-anim")
@@ -74,17 +70,12 @@ export default function Slider () {
 
   return (
       <div className=' flex justify-center items-center'> 
-           <div ref={slideRef} className=' lg:w-[40%]  select-none relative '>
+           <div ref={slideRef} className=' lg:w-full select-none relative h-[270px] lg:h-[660px] object-cover'>
           <div className=" aspect-w-16 aspect-h-9">
 
-          <img src={featuredProducts[currentIndex]} alt="" className=' object-contain w-full'/>
+          <img src={featuredProducts[currentIndex]} alt="" className=' lg:object-cover object-cover  w-full lg:h-[660px]   hover:cursor-pointer'/>
           </div>
 
-          <div className='absolute w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center'>
-
-          <img src='/assets/left.png' onClick={handleOnPreviousClick} className=" w-10 h-10 bg-gray-400 rounded-full p-1" ></img>
-          <img src='/assets/right.png' onClick={handleOnNextClick}  className=" w-10 h-10 bg-gray-400 rounded-full p-1"></img>
-          </div>
       </div>
 
       </div>
