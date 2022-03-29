@@ -1,5 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { stat } from "fs";
 import { RootState } from "../../app/Store";
+
+interface loginUser{
+  email: string;
+  password: string;
+
+}
 interface user {
   name: string;
   email: string;
@@ -12,6 +19,7 @@ const initialState = () => ({
   isSuccess: false,
   isError: false,
   errorMessage: "",
+  redirect: ''
 });
 
 export const userSlice = createSlice({
@@ -39,6 +47,20 @@ export const userSlice = createSlice({
       state.isError = true;
       state.errorMessage = payload.message;
     });
+    builder.addCase(loginUser.fulfilled, (state, { payload }: any) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.redirect = payload.route;
+    });
+    builder.addCase(loginUser.pending, (state) => {
+      state.isFetching = true;
+    });
+    builder.addCase(loginUser.rejected, (state, { payload }: any) => {
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = payload.message;
+    });
+
   },
 });
 
@@ -71,6 +93,42 @@ export const signupUser = createAsyncThunk(
     }
   }
 );
+
+
+export const loginUser = createAsyncThunk(
+  "users/login",
+  async ({ email, password }:loginUser, thunkAPI) => {
+    try {
+      const response = await fetch(
+        "/api/user/login",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      )
+      let data = await response.json()
+      console.log("response", data)
+      if (response.status === 200) {
+        localStorage.setItem("token", data.token)
+        return data
+      } else {
+        return thunkAPI.rejectWithValue(data)
+      }
+    } catch (e: any) {
+      console.log("Error", e.response.data)
+      thunkAPI.rejectWithValue(e.response.data)
+    }
+  }
+)
+
+
 
 export const { login, logout, clearState } = userSlice.actions;
 export const userSelector = (state: RootState) => state.user;

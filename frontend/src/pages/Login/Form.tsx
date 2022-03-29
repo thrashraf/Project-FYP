@@ -1,8 +1,10 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Toast from "../../components/Toast";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { loginUser, userSelector, clearState } from '../../features/user/User';
 
 
 export const Form = () => {
@@ -11,6 +13,10 @@ export const Form = () => {
   const [message, setMessage] = useState<string>("");
   const [status, setStatus] = useState<string>("");
 
+  const { isFetching, isSuccess, isError, errorMessage, redirect } = useAppSelector(
+    userSelector
+  );
+
   const navigate = useNavigate();
   const toastRef = useRef<any>(null);
   
@@ -18,19 +24,27 @@ export const Form = () => {
 
   const onSubmithandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    console.log(email, password);
-    axios
-      .post("/api/user/login", { email, password }, { withCredentials: true })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data.route);
-        navigate(res.data.route);
-      })
-      .catch((err) => {
-        createUserHandler('error', err.response.data.message)
-        console.log(err);
-      });
+    const data = {email, password}
+    dispatch(loginUser(data))
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearState());
+    };
+  }, []);
+  useEffect(() => {
+    if (isError) {
+      createUserHandler('error', errorMessage)
+      dispatch(clearState());
+    }
+    if (isSuccess) {
+      navigate(redirect)
+      dispatch(clearState());
+    }
+  }, [isError, isSuccess]);
+
+  
 
     const createUserHandler = (status: string, message: string) =>{
       if(toastRef.current !== null){
