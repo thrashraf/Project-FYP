@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { stat } from "fs";
 import { RootState } from "../../app/Store";
+import jwt_decode from 'jwt-decode';
 
-interface loginUser{
+interface loginInterface{
   email: string;
   password: string;
 
@@ -51,6 +51,7 @@ export const userSlice = createSlice({
       state.isFetching = false;
       state.isSuccess = true;
       state.redirect = payload.route;
+      state.user = jwt_decode(payload.accessToken);
     });
     builder.addCase(loginUser.pending, (state) => {
       state.isFetching = true;
@@ -97,7 +98,7 @@ export const signupUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   "users/login",
-  async ({ email, password }:loginUser, thunkAPI) => {
+  async ({ email, password }: loginInterface, thunkAPI) => {
     try {
       const response = await fetch(
         "/api/user/login",

@@ -77,7 +77,10 @@ export const loginUser = async (req, res) => {
 
     //generate token if true
     const accessToken = jwt.sign({
-        id: userInfo.id
+        id: userInfo.id,
+        name: userInfo.name,
+        email: userInfo.email,
+        profile_picture: userInfo.profile_picture
       },
       process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "20s",
@@ -89,6 +92,7 @@ export const loginUser = async (req, res) => {
         id: userInfo.id,
         name: userInfo.name,
         email: userInfo.email,
+        role: userInfo.role,
         profile_picture: userInfo.profile_picture
       },
       process.env.REFRESH_TOKEN_SECRET, {
@@ -143,13 +147,16 @@ export const getAllUser = async (req, res) => {
 }
 
 export const Logout = async (req, res) => {
+  
   const refreshToken = req.cookies.refreshToken;
-  if (!refreshToken) return res.sendStatus(204);
-  const user = await user.findRefreshToken(refreshToken);
 
-  if (!user[0]) return res.sendStatus(204);
-  const userId = user[0].id;
-  await user.updateRefreshToken(userId);
+  if (!refreshToken) return res.sendStatus(204);
+
+  const [userInfo] = await user.findRefreshToken(refreshToken);
+
+  if (!userInfo[0]) return res.sendStatus(204);
+  const id = userInfo[0].id;
+  await user.updateRefreshToken(id);
 
   res.clearCookie("refreshToken");
   return res.sendStatus(200);

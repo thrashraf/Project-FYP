@@ -8,6 +8,8 @@ import { Notification } from "../../icons/Notification";
 import { Logout } from "../../icons/Logout";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Hamburger } from "../../components/Hamburger";
+import { useAppSelector } from '../../app/hooks';
+import { userSelector } from '../../features/user/User';
 
 type Props = {
   setTabs: Dispatch<SetStateAction<number>>;
@@ -31,6 +33,8 @@ export const Sidebar = (props: Props) => {
       name: "Activities ",
     },
   ];
+
+  const { user }: any = useAppSelector(userSelector);
 
   return (
     <>
@@ -65,19 +69,19 @@ export const Sidebar = (props: Props) => {
             })}
           </ul>
           {/* profile */}
-          {/* <div className="flex items-center mb-4 px-8 absolute bottom-10 ">
+          <div className="flex items-center mb-4 px-8 absolute bottom-10 ">
             <div className="w-10 h-10 bg-cover rounded-md mr-3">
               <img
-                src="https://tuk-cdn.s3.amazonaws.com/assets/components/avatars/a_5.png"
+                src={user.profile_image ? user.profile_image : '/assets/dummy_profile.png'}
                 alt="profile"
                 className="rounded-full h-full w-full overflow-hidden shadow"
               />
             </div>
             <div>
-              <p className="text-gray-600 text-sm font-medium">Steve Doe</p>
+              <p className="text-gray-600 text-sm font-medium">{user?.name}</p>
               <p className="text-gray-600 text-xs">View Profile</p>
             </div>
-          </div> */}
+          </div>
         </div>
         <div className="px-8 bg-gray-900">
           <ul className="w-full flex items-center justify-between ">
