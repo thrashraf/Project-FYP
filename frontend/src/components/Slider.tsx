@@ -3,21 +3,22 @@ import React, { useEffect, useState, useRef } from 'react'
 
 
 
-const featuredProducts = [
-    "/assets/1.jpg",
-    "/assets/2.jpg",
-    "/assets/3.jpg",
-
-];
-
-let count = 0;
-let slideInterval: any
 export default function Slider () {
     const [currentIndex, setCurrentIndex] = 
     useState(0);
-
+    
+    let count = 0;
+    let slideInterval: any
     const slideRef = useRef<HTMLDivElement>(null);
-
+    
+    
+    const featuredProducts = [
+        "/assets/1.jpg",
+        "/assets/2.jpg",
+        "/assets/3.jpg",
+    
+    ];
+    
     const removeAnimation = () => {
         if(slideRef.current !== null){
 
@@ -46,9 +47,7 @@ export default function Slider () {
 
         const handleOnNextClick = () => {
             if(slideRef.current !== null){
-
             
-                
                 count = (count + 1) % featuredProducts.
                 length;
                 setCurrentIndex(count);

@@ -29,19 +29,15 @@ export const Form = () => {
   };
 
   useEffect(() => {
-    return () => {
-      dispatch(clearState());
-    };
-  }, []);
-  useEffect(() => {
     if (isError) {
       createUserHandler('error', errorMessage)
       dispatch(clearState());
     }
     if (isSuccess) {
       navigate(redirect)
-      dispatch(clearState());
+      
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, isSuccess]);
 
   
