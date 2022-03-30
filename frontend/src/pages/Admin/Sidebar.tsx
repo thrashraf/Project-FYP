@@ -1,7 +1,5 @@
 import { Dashboard } from "../../icons/Dashboard";
 import { User } from "../../icons/User";
-import { Achievement } from "../../icons/Achievement";
-import { Innovation } from "../../icons/Innovation";
 import { Report } from "../../icons/Report";
 import { Setting } from "../../icons/Setting";
 import { Notification } from "../../icons/Notification";
@@ -72,7 +70,7 @@ export const Sidebar = (props: Props) => {
           <div className="flex items-center mb-4 px-8 absolute bottom-10 ">
             <div className="w-10 h-10 bg-cover rounded-md mr-3">
               <img
-                src={user.profile_image ? user.profile_image : '/assets/dummy_profile.png'}
+                src={user?.profile_image ? user.profile_image : '/assets/dummy_profile.png'}
                 alt="profile"
                 className="rounded-full h-full w-full overflow-hidden shadow"
               />

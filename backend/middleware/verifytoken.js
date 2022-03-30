@@ -3,11 +3,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const verifytoken = (req, res, next) => {
+ 
+  console.log(req.headers)
   const authHeader = req.headers["authorization"];
 
   const token = authHeader && authHeader.split(" ")[1];
 
-  console.log(token)
+  console.log('token:' + authHeader)
 
   if (token === null) return res.sendStatus(401);
 

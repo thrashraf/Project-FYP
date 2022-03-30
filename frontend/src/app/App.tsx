@@ -4,8 +4,19 @@ import Register from '../pages/Register';
 import Report from '../pages/Report';
 import { Home } from '../pages/Home/Home';
 import Admin from '../pages/Admin';
+import { useAppDispatch } from './hooks';
+import { useEffect } from 'react';
+import { refreshUser } from '../features/user/User';
 
 function App() {
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUser())
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <>
       <BrowserRouter>

@@ -15,6 +15,7 @@ interface user {
 
 const initialState = () => ({
   user: null,
+  token: null,
   isFetching: false,
   isSuccess: false,
   isError: false,
@@ -32,7 +33,8 @@ export const userSlice = createSlice({
     logout: (state) => {
       state.user = null;
     },
-    clearState: (state) => initialState(),
+    clearState: () => initialState(),
+    
   },
   extraReducers: (builder) => {
     builder.addCase(signupUser.fulfilled, (state, { payload }: any) => {
@@ -52,11 +54,26 @@ export const userSlice = createSlice({
       state.isSuccess = true;
       state.redirect = payload.route;
       state.user = jwt_decode(payload.accessToken);
+      state.token = payload.accessToken;
     });
     builder.addCase(loginUser.pending, (state) => {
       state.isFetching = true;
     });
     builder.addCase(loginUser.rejected, (state, { payload }: any) => {
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = payload.message;
+    });
+    builder.addCase(refreshUser.fulfilled, (state, { payload }: any) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.user = jwt_decode(payload.accessToken);
+      state.token = payload.accessToken;
+    });
+    builder.addCase(refreshUser.pending, (state) => {
+      state.isFetching = true;
+    });
+    builder.addCase(refreshUser.rejected, (state, { payload }: any) => {
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;
@@ -117,7 +134,6 @@ export const loginUser = createAsyncThunk(
       let data = await response.json()
       console.log("response", data)
       if (response.status === 200) {
-        localStorage.setItem("token", data.token)
         return data
       } else {
         return thunkAPI.rejectWithValue(data)
@@ -129,7 +145,33 @@ export const loginUser = createAsyncThunk(
   }
 )
 
-
+export const refreshUser = createAsyncThunk(
+  "users/token",
+  async (_, thunkAPI: any) => {
+    try {
+      const response = await fetch(
+        "/api/user/token",
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      let data = await response.json()
+      console.log("response", data)
+      if (response.status === 200) {
+        return data
+      } else {
+        return thunkAPI.rejectWithValue(data)
+      }
+    } catch (e: any) {
+      console.log("Error", e.response.data)
+      thunkAPI.rejectWithValue(e.response.data)
+    }
+  }
+)
 
 export const { login, logout, clearState } = userSlice.actions;
 export const userSelector = (state: RootState) => state.user;

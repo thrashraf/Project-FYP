@@ -1,10 +1,10 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Modal } from '../../../components/Modal';
 import { DeleteNotification } from './DeleteNotification';
 import { Table } from "./Table";
-
-
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { getAllUser } from '../../../features/admin/Admin';
+import { userSelector } from '../../../features/user/User';
 interface User {
   id: string;
   name: string;
@@ -30,15 +30,18 @@ const Users = (props: props) => {
 
     //show one detail user to pass into modal
     const [user, setUser] = useState<Object>({});
+
+
+
+    const dispatch = useAppDispatch();
+
+    const { token } = useAppSelector(userSelector);
   
     useEffect(() => {
-      const fetchData = async () => {
-        const response = await axios.get("/api/user/getAllUser");
-        setAllUser(response.data.allUser);
-      };
-      fetchData();
+      console.log(token);
+      dispatch(getAllUser(token));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
   
   const showMoreHandler = (id: string, user: object) => {
     setUser(user);
