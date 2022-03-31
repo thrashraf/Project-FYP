@@ -18,7 +18,7 @@ function App() {
   }, [])
 
   return (
-    <>
+    <div className=' font-poppins'>
       <BrowserRouter>
         <Routes>
           <Route path='/login' element={<Login />} />
@@ -28,7 +28,7 @@ function App() {
           <Route path='/admin' element={<Admin />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

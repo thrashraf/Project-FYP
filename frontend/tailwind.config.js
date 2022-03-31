@@ -4,6 +4,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+
+    fontFamily: {
+      'poppins': [ 'Poppins', 'sans-serif']
+    },
+
     extend: {
       keyframes: {
           'fade-in-down': {
