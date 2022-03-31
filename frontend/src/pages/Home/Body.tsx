@@ -3,7 +3,7 @@ import Innovation from "../../components/Innovation";
 
 export const Body = () => {
   return (
-    <div className="mt-10">
+    <div className="" id='Publication'>
       <h1 className=" font-extrabold lg:text-5xl mb-2 text-center rounded-2xl border-gray-800 border-2 w-[50%] mx-auto p-2">
         Publication
       </h1>

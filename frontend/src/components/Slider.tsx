@@ -1,7 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
-
-
-
+import { useEffect, useState, useRef } from 'react'
 
 export default function Slider () {
     const [currentIndex, setCurrentIndex] = 
@@ -68,8 +65,9 @@ export default function Slider () {
         
 
   return (
-      <div className=' flex justify-center items-center'> 
+      <div className=' flex justify-center items-center mb-10' id='Slider'> 
            <div ref={slideRef} className=' lg:w-full select-none relative h-[270px] lg:h-[660px] object-cover'>
+               
           <div className=" aspect-w-16 aspect-h-9">
 
           <img src={featuredProducts[currentIndex]} alt="" className=' lg:object-cover object-cover  w-full lg:h-[660px]   hover:cursor-pointer'/>

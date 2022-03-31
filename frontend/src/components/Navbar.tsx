@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-scroll'
 
 
 type Props = {}
@@ -11,7 +12,7 @@ export const Navbar = (props: Props) => {
 
   return (
         <>
-            <div className="bg-gray-200 h-full w-full">
+            <div className="bg-gray-200 h-full w-full" id="Navbar">
                 {/* Code block starts */}
                 <nav className=" bg-gray-900 shadow lg:block hidden">
                     <div className="mx-auto container px-6 py-2 lg:py-0">
@@ -126,7 +127,16 @@ export const Navbar = (props: Props) => {
                                         </span>
                                         Dashboard
                                     </a>
-                                    <a href="javascript: void(0)" className="flex px-5 items-center py-6 text-sm leading-5 text-white hover:bg-purple-800 focus:bg-gray-100 focus:text-black  focus:outline-none transition duration-150 ease-in-out">
+                                    <Link to='Publication' smooth={true} spy={true} className="flex px-5 items-center py-6 text-sm leading-5 text-white hover:bg-purple-800 focus:bg-gray-100 focus:text-black  focus:outline-none transition duration-150 ease-in-out">
+                                        <span className="mr-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-puzzle" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" />
+                                                <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
+                                            </svg>
+                                        </span>
+                                        Publication
+                                    </Link>
+                                    <Link to='Publication' smooth={true} spy={true} className="flex px-5 items-center py-6 text-sm leading-5 text-white hover:bg-purple-800 focus:bg-gray-100 focus:text-black  focus:outline-none transition duration-150 ease-in-out">
                                         <span className="mr-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-puzzle" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" />
@@ -134,7 +144,7 @@ export const Navbar = (props: Props) => {
                                             </svg>
                                         </span>
                                         Reports
-                                    </a>
+                                    </Link>
                                     <a href="javascript: void(0)" className="flex px-5 items-center py-6 text-sm leading-5 text-white hover:bg-purple-800 focus:bg-gray-100 focus:text-black focus:outline-none transition duration-150 ease-in-out">
                                         <span className="mr-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-compass" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
