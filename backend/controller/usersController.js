@@ -1,5 +1,4 @@
 import user from "../model/users.js";
-import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
@@ -8,7 +7,11 @@ dotenv.config();
 export const registerUser = async (req, res) => {
   try {
     //get value from frontend
-    const { firstName, lastName, email, password } = req.body;
+    const {
+      name,
+      email,
+      password
+    } = req.body;
     //console.log(firstName, lastName, email, password);
 
     //want to check if user exist
@@ -25,11 +28,13 @@ export const registerUser = async (req, res) => {
     //hash user password
     const hashPassword = bcrypt.hashSync(password);
 
+    console.log(hashPassword)
+
     //create user
-    await user.register(firstName, lastName, email, hashPassword);
+    await user.register(name, email, hashPassword);
 
     //response successful create user 🎉
-    res.status(200).json({ 
+    res.status(200).json({
       message: "successful create!",
     });
   } catch (error) {
@@ -39,37 +44,58 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    let route;
+
+    const {
+      email,
+      password
+    } = req.body;
+
+    //check for existing email
     const [checkExistingEmail] = await user.checkEmail(email);
 
+    //thrown error if not found any
     if (checkExistingEmail.length === 0) {
       return res.status(400).json({
-        message: "Incorrect Email or Password",
+        message: "Incorrect password",
       });
     }
 
     //User info
-
     const userInfo = checkExistingEmail[0]
+
+    //compare password with req.password and database password
+    //will return boolean
     const isValid = bcrypt.compareSync(password, userInfo.password)
 
+    //thrown error if false
     if (!isValid) {
-      return res.status(400).json({});
+      return res.status(400).json({
+        message: "Incorrect password"
+      });
     }
 
-    const accessToken = jwt.sign(
-      { id: userInfo.id },
-      process.env.ACCESS_TOKEN_SECRET,
-      {
+    //generate token if true
+    const accessToken = jwt.sign({
+        id: userInfo.id,
+        name: userInfo.name,
+        email: userInfo.email,
+        profile_picture: userInfo.profile_picture
+      },
+      process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "20s",
       }
     );
     console.log(accessToken);
 
-    const refreshToken = jwt.sign(
-      { id: userInfo.id },
-      process.env.REFRESH_TOKEN_SECRET,
-      {
+    const refreshToken = jwt.sign({
+        id: userInfo.id,
+        name: userInfo.name,
+        email: userInfo.email,
+        role: userInfo.role,
+        profile_picture: userInfo.profile_picture
+      },
+      process.env.REFRESH_TOKEN_SECRET, {
         expiresIn: "1d",
       }
     );
@@ -80,17 +106,31 @@ export const loginUser = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.status(200).json({ accessToken });
+    //create dynamic routes based on role
+    if (userInfo.role === 'Admin') {
+      route = '/admin'
+    } else if (userInfo.role === 'HD') {
+      route = '/head-department'
+    } else {
+      route = '/'
+    }
+
+    res.status(200).json({
+      accessToken,
+      route
+    });
 
   } catch (error) {
 
     console.log(error)
-    res.status(404).json({ message: "Email Not Found" });
+    res.status(404).json({
+      message: "Incorrect password"
+    });
   }
 
 };
 
-export const getAllUser = async(req, res) => {
+export const getAllUser = async (req, res) => {
   try {
     const [allUser] = await user.getAllUser();
 
@@ -100,18 +140,23 @@ export const getAllUser = async(req, res) => {
 
   } catch (error) {
     console.log(error)
-    res.status(400).json({message: 'Something went wrong 🤔'});
+    res.status(400).json({
+      message: 'Something went wrong 🤔'
+    });
   }
 }
 
 export const Logout = async (req, res) => {
+  
   const refreshToken = req.cookies.refreshToken;
-  if (!refreshToken) return res.sendStatus(204);
-  const user = await user.findRefreshToken(refreshToken);
 
-  if (!user[0]) return res.sendStatus(204);
-  const userId = user[0].id;
-  await user.updateRefreshToken(userId);
+  if (!refreshToken) return res.sendStatus(204);
+
+  const [userInfo] = await user.findRefreshToken(refreshToken);
+
+  if (!userInfo[0]) return res.sendStatus(204);
+  const id = userInfo[0].id;
+  await user.updateRefreshToken(id);
 
   res.clearCookie("refreshToken");
   return res.sendStatus(200);
