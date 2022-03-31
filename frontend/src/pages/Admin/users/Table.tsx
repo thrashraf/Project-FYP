@@ -9,6 +9,8 @@ type Props = {
 };
 
 export const Table = (props: Props) => {
+
+
   return (
     <div className="h-full">
       <div className="mx-auto container bg-white dark:bg-gray-800 shadow rounded">
