@@ -1,9 +1,7 @@
 import React, { useRef, useState } from "react";
-import { Input } from "../../components/Input";
 import { Template } from "./Template";
-import { Image } from "../../icons/Image";
-import axios from "axios";
-
+import { ImageTemplate } from "./ImageTemplate";
+import { Sidebar } from "./Sidebar";
 
 const Report = () => {
   const [title, setTitle] = useState<string>("");
@@ -49,96 +47,8 @@ const Report = () => {
 
   return (
     <div className="lg:grid grid-cols-2  ">
-      <section className="my-10 mx-5  lg:mx-10">
-        {/* heading */}
-        <h1 className="text-center font-medium text-2xl">Report Maker</h1>
-
-        <div className="mt-10">
-          <section className="w-full my-5">
-            <p className="my-1 text-sm text-gray-400 ml-1">Title</p>
-            <Input
-              type="text"
-              placeholder=""
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </section>
-
-          <section className="grid grid-cols-2 gap-5 my-5">
-            <div>
-              <p className="my-1 text-sm text-gray-400 ml-1">Program Name</p>
-              <input
-                type="text"
-                className="bg-blue-50 px-3 py-3 rounded-lg outline-none w-full"
-                value={programName}
-                onChange={(e) => setProgramName(e.target.value)}
-              />
-            </div>
-            <div>
-              <p className="my-1 text-sm text-gray-400 ml-1">Organizer</p>
-              <input
-                type="string"
-                className="bg-blue-50 px-3 py-3 rounded-lg outline-none w-full"
-                value={organizer}
-                onChange={(e) => setOrganizer(e.target.value)}
-              />
-            </div>
-          </section>
-
-          <section className="grid grid-cols-2 gap-5 my-5">
-            <div>
-              <p className="my-1 text-sm text-gray-400 ml-1">Date</p>
-              <input
-                type="date"
-                className="bg-blue-50 px-3 py-3 rounded-lg outline-none w-full"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
-            </div>
-            <div>
-              <p className="my-1 text-sm text-gray-400 ml-1">Venue</p>
-              <input
-                type="string"
-                className="bg-blue-50 px-3 py-3 rounded-lg outline-none w-full"
-                value={venue}
-                onChange={(e) => setVenue(e.target.value)}
-              />
-            </div>
-          </section>
-
-          <section className="w-full my-5">
-            <p className="my-1 text-sm text-gray-400 ml-1">Content</p>
-            <textarea
-              cols={30}
-              rows={13}
-              value={content}
-              onChange={contentHandler}
-              onKeyPress={contentHandler}
-              className="bg-blue-50 px-3 py-3 rounded-lg outline-none w-full resize-none"
-            />
-          </section>
-
-          <section
-            className="my-5 flex items-center text-blue-400 cursor-pointer 
-          "
-            onClick={uploadFile}
-          >
-            <div className="px-3 rounded-md bg-blue-50">
-              <Image />
-            </div>
-            <p className="ml-5 font-medium">Upload File</p>
-            <input
-              type="file"
-              accept="image/*"
-              multiple={true}
-              name="upload"
-              className="hidden"
-              ref={uploadRef}
-              onChange={(e) => fileSelectorHandler(e)}
-            />
-          </section>
-        </div>
-      </section>
+      
+      <Sidebar title={title} content={content} date={date} organizer={organizer} venue={venue} programName={programName} setTitle={setTitle} setContent={setContent} setProgramName={setProgramName} setOrganizer={setOrganizer} setVenue={setVenue} setDate={setDate} contentHandler={contentHandler} uploadFile={uploadFile} uploadRef={uploadRef} fileSelectorHandler={fileSelectorHandler} />
 
       <section className="hidden lg:flex flex-col bg-gray-500 pb-10">
         <Template
@@ -181,22 +91,12 @@ const Report = () => {
                 <p>(PENGARAH)</p>
               </section>
             </section>
+
           </div>
         ) : null}
-        <div
-          className={`my-2.5 w-[500px] h-[600px] font-serif m-auto bg-white rounded-sm p-10 flex flex-col text-[10px] relative ${
-            !isPhoto && "hidden"
-          }`}
-        >
-          <h1 className="font-bold">GAMBAR GAMBAR SEPANJANG AKTIVITI</h1>
-          <section className="grid grid-cols-3 gap-5 mt-10">
-            {photo?.map((img, index) => {
-              return(
-                <img src={`${img.url}`} alt="pho" key={index} className="w-[100px] h-[100px] object-cover m-auto"/>
-              )
-            })}
-          </section>
-        </div>
+        
+        <ImageTemplate isPhoto={isPhoto} photo={photo} />
+
         )
         <section className="mt-10 flex justify-end mr-10">
           <button className="mt-10 bg-green-500 text-white px-3 py-2 rounded-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-green-400 cursor-pointer w-[100px] mr-5">
