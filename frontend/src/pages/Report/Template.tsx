@@ -12,7 +12,7 @@ type Props = {
 export const Template = (props: Props) => {
 
       return (
-        <div className="my-2/5 w-[500px] h-[600px] font-serif m-auto bg-white rounded-sm p-10 flex flex-col text-[10px]">
+        <div className="my-2/5 w-[500px] h-[600px] font-serif m-auto bg-white rounded-sm p-10 flex flex-col text-[10px] relative">
           <img
             src="/assets/logoPoli.png"
             alt="psmza"
@@ -45,7 +45,6 @@ export const Template = (props: Props) => {
             <section className="mt-10">
                 <h1 className="font-bold">PENGISIAN/PERLAKSANAAN PROGRAM</h1>
                 {props.content.slice(0,500).split("\n").map((text, index) => {
-                  console.log(text.length)
                   return (
                     <p key={index} className=" indent-8 mt-5 text-justify">{text}</p>
                     )

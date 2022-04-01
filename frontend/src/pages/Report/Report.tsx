@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Input } from "../../components/Input";
 import { Template } from "./Template";
+import { Image } from '../../icons/Image';
 
 type Props = {};
 
@@ -13,19 +14,37 @@ const Report = (props: Props) => {
   const [organizer, setOrganizer] = useState<string>("");
   const [venue, setVenue] = useState<string>("");
 
+  const [isPhoto, setIsPhoto] = useState<boolean>(false);
+  const [photo, setPhoto] = useState<string []>([]);
+
+  const uploadRef = useRef<HTMLInputElement>(null);
+
   const contentHandler = (e: any) => {
-    console.log(content);
     if (e.key === 'Enter') {
       setContent(`${e.target.value}\n`)
     }
     setContent(e.target.value)
   }
 
+  const uploadFile = () => {
+    if (uploadRef.current !== null) {
+      uploadRef.current.click()
+    } 
+  }
+
+  const fileSelectorHandler = (e: any) => {
+    console.log(e.target.files);
+    setPhoto(photo => [...photo, e.target.files])
+    console.log(photo);
+  }
+
+  
+
   return (
     <div className="lg:grid grid-cols-2  ">
       <section className="my-10 mx-5  lg:mx-10">
         {/* heading */}
-        <h1 className="text-center font-medium">Report Maker</h1>
+        <h1 className="text-center font-medium text-2xl">Report Maker</h1>
 
         <div className="mt-10">
           <section className="w-full my-5">
@@ -91,6 +110,17 @@ const Report = (props: Props) => {
               className="bg-blue-50 px-3 py-3 rounded-lg outline-none w-full resize-none"
             />
           </section>
+
+          <section className="my-5 flex items-center text-blue-400 cursor-pointer 
+          " onClick={uploadFile}>  
+              <div className="px-3 rounded-md bg-blue-50">
+                <Image/>
+              </div>
+              <p className="ml-5 font-medium">Upload File</p>
+              <input type="file" accept="image/*" multiple={true} className="hidden" ref={uploadRef} onChange={(e) => fileSelectorHandler(e)}/>
+          </section>
+
+
         </div>
       </section>
 
@@ -120,6 +150,9 @@ const Report = (props: Props) => {
             </div>
         ) : null}
 
+        <div className={`my-2.5 w-[500px] h-[600px] font-serif m-auto bg-white rounded-sm p-10 flex flex-col text-[10px] relative ${!isPhoto && 'hidden'}`}>
+              
+        </div>
         
       )
         
