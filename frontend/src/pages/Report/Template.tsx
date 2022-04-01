@@ -2,7 +2,7 @@ import React from "react";
 
 type Props = {
   title: string;
-  content: string [];
+  content: string;
   name: string,
   organizer: string,
   date: string,
@@ -44,12 +44,16 @@ export const Template = (props: Props) => {
     
             <section className="mt-10">
                 <h1 className="font-bold">PENGISIAN/PERLAKSANAAN PROGRAM</h1>
-                <p className=" indent-8 mt-5 text-justify">{props.content.slice(0,450)}</p>
+                {props.content.slice(0,500).split("\n").map((text, index) => {
+                  console.log(text.length)
+                  return (
+                    <p key={index} className=" indent-8 mt-5 text-justify">{text}</p>
+                    )
+                  })}
             </section>
 
-            
-    
-            <section className={`mt-10 ${props.content.length > 450 ? 'hidden' : null}`} >
+
+            <section className={` ${props.content.length > 450 ? 'hidden' : null} absolute bottom-5`} >
                 <p>Disediakan oleh: </p>
                 <div className=" border-b-2 border-dotted border-black w-[80px] mt-2 h-[30px]">
                     <img src="/assets/signature.png" alt="signature" className="object-cover h-[30px] mx-auto" />
