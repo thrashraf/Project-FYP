@@ -34,7 +34,11 @@ export const Table = () => {
 
 
   return (
-    <div className="h-full mb-20">
+    <div className="pt-10  pb-10" id='Inno'>
+      <h1 className=" font-extrabold lg:text-5xl mb-8 text-center rounded-2xl border-gray-800 border-2 w-[50%] mx-auto p-2">
+        Innovation
+      </h1>
+    <div className="h-full mb-[150px]">
       <div className="mx-auto container bg-white dark:bg-gray-800 shadow rounded">
         {/* <div className="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full">
           
@@ -46,14 +50,14 @@ export const Table = () => {
             <tr className="w-full h-16 border-gray-300 dark:border-gray-200 border-b py-8">
               
 
-              <th className="text-gray-600 dark:text-gray-400 font-normal  text-center text-sm tracking-normal ">
+              <th className="text-gray-600 pr-5 dark:text-gray-400 font-normal  text-center text-sm tracking-normal ">
                 No.
               </th>
 
-              <th className="text-gray-600 dark:text-gray-400 font-normal  text-left text-sm tracking-normal ">
+              <th className="text-gray-600 dark:text-gray-400 font-normal  text-left  text-sm tracking-normal ">
                 Innovasion Title
               </th>
-              <th className="text-gray-600 dark:text-gray-400 font-normal  text-left text-sm tracking-normal leading-4">
+              <th className="text-gray-600 dark:text-gray-400 font-normal  text-center text-sm  tracking-normal leading-4">
                 Name
               </th>
              
@@ -66,18 +70,22 @@ export const Table = () => {
 
               return (
                 <tr
-                  className="h-24 border-gray-300 dark:border-gray-200 border-b"
+                  className="h-24   border-gray-300 dark:border-gray-200 border-b"
                   key={inno.id}
                 >
-                  <td className="pr-6 whitespace-no-wrap">
-                    <div className="flex items-center">
 
-                      <p className="ml-2 text-gray-800  tracking-normal leading-4 text-sm">
+                  <td className="text-sm pr-5 text-center whitespace-no-wrap text-gray-800  tracking-normal leading-4">
+                    {inno.id}
+                  </td>
+                  <td className=" whitespace-no-wrap">
+                    <div className="flex items-center">
+                      
+                      <p className=" text-gray-800 ] text-center tracking-normal leading-4 text-sm">
                         {inno.Title}
                       </p>
                     </div>
                   </td>
-                  <td className="text-sm whitespace-no-wrap text-gray-800  tracking-normal leading-4">
+                  <td className="text-sm whitespace-no-wrap text-center text-gray-800  tracking-normal leading-4">
                     {inno.Name}
                   </td>
 
@@ -94,5 +102,6 @@ export const Table = () => {
         </table>
       </div>
     </div>
+  </div>
   );
 };

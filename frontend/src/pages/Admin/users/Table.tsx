@@ -10,6 +10,7 @@ type Props = {
 
 export const Table = (props: Props) => {
   return (
+
     <div className="h-full">
       <div className="mx-auto container bg-white dark:bg-gray-800 shadow rounded">
         {/* <div className="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full">
